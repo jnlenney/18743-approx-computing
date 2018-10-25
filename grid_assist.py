@@ -1,3 +1,5 @@
+import interpolation
+
 def readFile(path):
     with open(path, "rt") as f:
         return f.read()
@@ -39,6 +41,8 @@ def main():
     basic = get_basic_gradient(num_rows, num_cols)
     save_grid(basic, "grids/basic_grid.txt")
     save_sv_grid(basic, "grids/sv_gradient.txt")
+    terped = interpolation.interp_extern(basic)
+    save_grid(terped, "grids/interpolated_example.txt")
 
 
 main()
