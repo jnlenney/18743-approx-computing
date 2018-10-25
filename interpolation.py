@@ -187,8 +187,8 @@ def naive_interpolation(data, rows, cols):
 
 def main():
     # 3 rows, 4 columns
-    num_true_rows = 150
-    num_true_cols = 200
+    num_true_rows = 75
+    num_true_cols = 100
     num_sp = 4
     num_rows = num_true_rows * num_sp
     num_cols = num_true_cols * num_sp
@@ -218,13 +218,12 @@ def main():
     print("doing naive interpolation")
 
     naive_interpolation(data_copy, num_rows, num_cols)
-    '''#print("\n\n****************************************************\n\n")
+    print("\n\n****************************************************\n\n")
     for line in mem.data:
         print(line)
     print("\n\n****************************************************\n\n")
-
     for line in data_copy:
-        print(line)'''
+        print(line)
     
     t4 = time.time()
     print("checking results")
@@ -234,6 +233,7 @@ def main():
     else:
         print("they don't match:(")
 
+    '''
     t5 = time.time()
     t_init = t1 - t0
     t_copy = t2 - t1
@@ -247,6 +247,13 @@ def main():
     print("time for gint", t_ginterp)
     print("time for nint", t_ninterp)
     print("time for chck", t_check)
+
+
+    print("num reads", mem.r_ct)
+    # num reads = tr*tc*5
+    print("num writes", mem.w_ct)
+    # num writes = tr*tc*15
+    print("num total", mem.get_mem_ct())'''
 
 
 
