@@ -1,0 +1,51 @@
+75 px by 100
+initing mem
+deepcopying mem
+doing smart interpolation
+doing naive interpolation
+checking results
+they match!
+time for init 0.012418270111083984
+time for copy 0.1343061923980713
+time for gint 0.7234282493591309
+time for nint 2.309934377670288
+time for chck 0.005103111267089844
+
+150 px by 200
+initing mem
+deepcopying mem
+doing smart interpolation
+doing naive interpolation
+checking results
+they match!
+time for init 0.05349421501159668
+time for copy 0.5314860343933105
+time for gint 3.495295763015747
+time for nint 25.605633974075317
+time for chck 0.013060331344604492
+
+200 px by 400 px
+initing mem
+deepcopying mem
+doing smart interpolation
+doing naive interpolation
+checking results
+they match!
+time for init 0.2221205234527588
+time for copy 2.436051607131958
+time for gint 12.760955572128296
+time for nint 243.15485429763794
+time for chck 0.09533381462097168
+
+600 x 800 px
+initing mem
+deepcopying mem
+doing smart interpolation
+doing naive interpolation
+checking results
+they match!
+time for init 0.8312201499938965
+time for copy 6.948832988739014
+time for gint 69.00092768669128
+time for nint 2197.98037648201
+time for chck 0.5716660022735596
