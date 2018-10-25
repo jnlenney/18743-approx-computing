@@ -28,9 +28,17 @@ class Buffer(object):
         # size shouldn't be 0
         self.buf = [0 for i in range(size)]
 
+    def init_with_val(self, val):
+        for i in range(len(self.buf)):
+            self.buf[i] = val
+
     def shift(self):
         self.buf.pop(0)
         self.buf.append(0)
+
+    def extend(self):
+        self.buf.pop(0)
+        self.buf.append(self.buf[-1])
 
     def shift_elem_in(self, data):
         # assumes not empty
@@ -58,7 +66,10 @@ def interp_row(mem, row, cols, buf, shift):
         col = c * 4
         if col < cols:
             data = mem.read(row, col)
-            buf.shift_elem_in(data)
+            if c == 0:
+                buf.init_with_val(data)
+            else:
+                buf.shift_elem_in(data)
         else:
             buf.shift()
 
@@ -78,7 +89,7 @@ def interp_row(mem, row, cols, buf, shift):
             data = mem.read(row, next_c)
             buf.shift_elem_in(data)
         else:
-            buf.shift()
+            buf.extend()
 
 def interp_col(mem, col, rows, buf, shift):
     # everything uses coeffs ABC, and all entries are fresh
@@ -89,7 +100,10 @@ def interp_col(mem, col, rows, buf, shift):
         row = r * 4
         if row < rows:
             data = mem.read(row, col)
-            buf.shift_elem_in(data)
+            if row == 0:
+                buf.init_with_val(data)
+            else:
+                buf.shift_elem_in(data)
         else:
             buf.shift()
 
@@ -109,7 +123,7 @@ def interp_col(mem, col, rows, buf, shift):
             data = mem.read(next_r, col)
             buf.shift_elem_in(data)
         else:
-            buf.shift()
+            buf.extend()
 
 def interp_abc(mem, rows, cols, buf):
     for row in range(0, rows, 4):
@@ -118,7 +132,7 @@ def interp_abc(mem, rows, cols, buf):
 
 def interp_cols(mem, rows, cols, buf):
     for col in range(0, cols):
-        shift = 2**6 if col % 4 else 2**4
+        shift = 2**6 if col % 4 != 0 else 2**4
         interp_col(mem, col, rows, buf, shift)
         buf.clear()
 
@@ -128,6 +142,9 @@ def interpolate(mem, rows, cols):
     # interpolate main rows and cols
     interp_abc(mem, rows, cols, buf)
     interp_cols(mem, rows, cols, buf)
+
+
+
 
 ##################### N A I V E #####################
 
