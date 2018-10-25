@@ -49,7 +49,7 @@ class Buffer(object):
         return res
 
 
-def interp_row(mem, row, cols, buf):
+def interp_row(mem, row, cols, buf, shift):
     # assumes buf is size 8, all zeros
     num_true_cols = cols//4
  
@@ -64,9 +64,9 @@ def interp_row(mem, row, cols, buf):
 
     # then actually calculate values, and continue reading
     for tc in range(num_true_cols):
-        val_a = buf.mul_coeffs("A")
-        val_b = buf.mul_coeffs("B")
-        val_c = buf.mul_coeffs("C")
+        val_a = buf.mul_coeffs("A")//shift
+        val_b = buf.mul_coeffs("B")//shift
+        val_c = buf.mul_coeffs("C")//shift
         c_a = tc*4 + 1
         c_b = tc*4 + 2
         c_c = tc*4 + 3
@@ -80,7 +80,7 @@ def interp_row(mem, row, cols, buf):
         else:
             buf.shift()
 
-def interp_col(mem, col, rows, buf):
+def interp_col(mem, col, rows, buf, shift):
     # everything uses coeffs ABC, and all entries are fresh
     num_true_rows = rows//4
 
@@ -95,9 +95,9 @@ def interp_col(mem, col, rows, buf):
 
     # then actually calculate, values, and continue reading
     for tr in range(num_true_rows):
-        val_a = buf.mul_coeffs("A")
-        val_b = buf.mul_coeffs("B")
-        val_c = buf.mul_coeffs("C")
+        val_a = buf.mul_coeffs("A")//shift
+        val_b = buf.mul_coeffs("B")//shift
+        val_c = buf.mul_coeffs("C")//shift
         r_a = tr*4 + 1
         r_b = tr*4 + 2
         r_c = tr*4 + 3
@@ -113,12 +113,13 @@ def interp_col(mem, col, rows, buf):
 
 def interp_abc(mem, rows, cols, buf):
     for row in range(0, rows, 4):
-        interp_row(mem, row, cols, buf)
+        interp_row(mem, row, cols, buf, 2**4)
         buf.clear()
 
 def interp_cols(mem, rows, cols, buf):
     for col in range(0, cols):
-        interp_col(mem, col, rows, buf)
+        shift = 2**6 if col % 4 else 2**4
+        interp_col(mem, col, rows, buf, shift)
         buf.clear()
 
 def interpolate(mem, rows, cols):
@@ -233,7 +234,6 @@ def main():
     else:
         print("they don't match:(")
 
-    '''
     t5 = time.time()
     t_init = t1 - t0
     t_copy = t2 - t1
@@ -253,8 +253,24 @@ def main():
     # num reads = tr*tc*5
     print("num writes", mem.w_ct)
     # num writes = tr*tc*15
-    print("num total", mem.get_mem_ct())'''
+    print("num total", mem.get_mem_ct())
 
 
+def interp_extern(grid):
+    num_true_rows = len(grid)
+    num_true_cols = len(grid[0])
+    num_sp = 4
+    num_rows = num_true_rows * num_sp
+    num_cols = num_true_cols * num_sp
 
-main()
+    mem = Memory(num_rows, num_cols)
+
+    for r in range(num_true_rows):
+        for c in range(num_true_cols):
+            val = grid[r][c]
+            mem.write(r*4,c*4,val)
+
+    interpolate(mem, num_rows, num_cols)
+    return mem.data
+
+
