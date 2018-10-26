@@ -25,5 +25,6 @@ These values may seem incredibly insignificant, but we believe they will become 
 ```interpolation.py``` - this file contains two implementation of sub-pixel interpolation written in python one is a naive implementation and the other uses a buffer\
 ```interpolatorBasic.sv``` - this file contains our system verilog implementation of our sub-pixel interpolation (which mimics the buffered python implementation)\
 ```draw_grid.py``` - this file reads text files with pixel data and creates a static animation to visualize pixels.\
-```grid_assist.py``` - this file produces text files with grids that can be used by our sv testbench, and our visualizer
+```grid_assist.py``` - this file produces text files with grids that can be used by our sv testbench, and our visualizer\
+```grids/``` - this directory contains all of the text files used as inputs for intepolation, and also the outputs of interpolation
 
