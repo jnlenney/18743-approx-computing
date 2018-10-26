@@ -289,5 +289,3 @@ def interp_extern(grid):
 
     interpolate(mem, num_rows, num_cols)
     return mem.data
-
-
