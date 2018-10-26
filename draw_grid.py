@@ -13,15 +13,21 @@ def readFile(path):
     with open(path, "rt") as f:
         return f.read()
 
-def read_grid(path):
-    contents = readFile(path)
-    return [[int(val) for val in line.strip().split(" ")] for line in contents.splitlines()]
+def read_grids(path):
+    res = []
+    for s in "rgb":
+        new_path = path.replace(".txt", "_%s.txt" % s)
+        contents = readFile(new_path)
+        L = [[int(val) for val in line.strip().split(" ")] for line in contents.splitlines()]
+        res.append(L)
+    return res
 
 def init(data):
-    path1 = "grids/basic_grid.txt"
-    path2 = "grids/interpolated_example.txt"
-    data.grid1 = read_grid(path1)
-    data.grid2 = read_grid(path2)
+    path1 = "grids/random_grid.txt"
+    path2 = "grids/interpolated_random.txt"
+    data.grids1 = read_grids(path1)
+    data.grids2 = read_grids(path2)
+
 
 def mousePressed(event, data):
     # use event.x and event.y
@@ -37,13 +43,14 @@ def timerFired(data):
 def rgbString(red, green, blue):
     return "#%02x%02x%02x" % (red, green, blue)
 
-def draw_grid(canvas, x, y, grid_height, grid, factor):
+def draw_grid(canvas, x, y, grid_height, grids, factor):
     # this is pretty cheesy
     '''
     you give it a factor to adjust input values (the interped gradient is about 4x more magnitude)
     but you always use 1 for values on the true pixel position
     see in else case below we divide magnitude by factor
     '''
+    grid = grids[0]
     box_size = grid_height//len(grid[0])
     for i in range(len(grid)):
         for j in range(len(grid[0])):
@@ -52,10 +59,17 @@ def draw_grid(canvas, x, y, grid_height, grid, factor):
             bot = top + box_size
             left = right + box_size
             if i % 4 == 0 and j % 4 == 0:
-                val = min(grid[i][j], 255)
+                val_r = min(grids[0][i][j], 255)
+                val_g = min(grids[1][i][j], 255)
+                val_b = min(grids[2][i][j], 255)
             else:
-                val = min(grid[i][j]//factor, 255)
-            color = rgbString(val, 0, 0)
+                val_r = min(grids[0][i][j]//factor, 255)
+                val_g = min(grids[1][i][j]//factor, 255)
+                val_b = min(grids[2][i][j]//factor, 255)
+            if val_r < 0: val_r = 0
+            if val_g < 0: val_g = 0
+            if val_b < 0: val_b = 0
+            color = rgbString(val_r, val_g, val_b)
             canvas.create_rectangle(right, top, left, bot, fill = color, width = 0)
 
 def redrawAll(canvas, data):
@@ -63,8 +77,8 @@ def redrawAll(canvas, data):
     side_length = data.height
     margin = .05 * side_length
     grid_height = side_length - 2*margin
-    draw_grid(canvas, margin, margin, grid_height, data.grid1, 1)
-    draw_grid(canvas, 3*margin+grid_height, margin, grid_height, data.grid2, 4)
+    draw_grid(canvas, margin, margin, grid_height, data.grids1, 1)
+    draw_grid(canvas, 3*margin+grid_height, margin, grid_height, data.grids2, 4)
 
 ####################################
 # use the run function as-is
