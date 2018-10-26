@@ -1,37 +1,9 @@
-## Welcome to GitHub Pages
+## Approximate Computing on FPGA
+### Carnegie Mellon University
+### 18-743 Course Project
+### Nikolai Lenney and Charles Li
 
-You can use the [editor on GitHub](https://github.com/jnlenney/18743-approx-computing/edit/master/README.md) to maintain and preview the content for your website in Markdown files.
+### Abstract
+This paper seeks to take sub-pixel interpolation used for video compression and minimize the power that the process consumes using approximate computing. This paper will focus on HEVC H.265 video compression protocol and its method of sub-pixel interpolation to create more accurate motion vectors. It seeks to not only explain how sub-pixel interpolation works and why it needs to be fixed but also to find solutions for the problem at hand. It explains the process through which we intend to approach the problem and solve it by simulating potential solutions on an FPGA to determine a best solution trading-off power and accuracy. This trade-off between power and accuracy is made through approximate computing, which simplifies the methods through which we compute the values for our sub-pixel interpolation without losing too much information. 
 
-Whenever you commit to this repository, GitHub Pages will run [Jekyll](https://jekyllrb.com/) to rebuild the pages in your site, from the content in your Markdown files.
 
-### Markdown
-
-Markdown is a lightweight and easy-to-use syntax for styling your writing. It includes conventions for
-
-```markdown
-Syntax highlighted code block
-
-# Header 1
-## Header 2
-### Header 3
-
-- Bulleted
-- List
-
-1. Numbered
-2. List
-
-**Bold** and _Italic_ and `Code` text
-
-[Link](url) and ![Image](src)
-```
-
-For more details see [GitHub Flavored Markdown](https://guides.github.com/features/mastering-markdown/).
-
-### Jekyll Themes
-
-Your Pages site will use the layout and styles from the Jekyll theme you have selected in your [repository settings](https://github.com/jnlenney/18743-approx-computing/settings). The name of this theme is saved in the Jekyll `_config.yml` configuration file.
-
-### Support or Contact
-
-Having trouble with Pages? Check out our [documentation](https://help.github.com/categories/github-pages-basics/) or [contact support](https://github.com/contact) and we’ll help you sort it out.
