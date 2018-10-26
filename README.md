@@ -1,5 +1,5 @@
 # Approximate Computing on FPGA
----
+
 ### Carnegie Mellon University
 ### 18-743 Course Project
 ### Nikolai Lenney and Charles Li
