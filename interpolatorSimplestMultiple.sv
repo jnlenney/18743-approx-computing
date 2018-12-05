@@ -8,7 +8,7 @@ module getAValShortAndSimple
                   - 8 * data_buffer[5]
                   +64 * data_buffer[4]
                   +16 * data_buffer[3]
-                  - 4 * data_buffer[2]
+                  - 4 * data_buffer[2];
 
 endmodule: getAValShortAndSimple
 

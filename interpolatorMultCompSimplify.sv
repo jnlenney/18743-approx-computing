@@ -1,4 +1,4 @@
-`default_nettype None
+`default_nettype none
 
 
 
@@ -45,9 +45,7 @@ module getCValSimple
                   +64 * data_buffer[4]
                   - 8 * data_buffer[3]
                   + 4 * data_buffer[2]
-                  - 1 * data_buffer[1]
-
-
+                  - 1 * data_buffer[1];
 
 endmodule: getCValSimple
 

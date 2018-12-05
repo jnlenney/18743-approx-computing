@@ -1,6 +1,6 @@
 `default_nettype none
 
-module appoxMult
+module approxMult
   (input  logic [ 7:0] A, B,
    output logic [31:0] Out);
 

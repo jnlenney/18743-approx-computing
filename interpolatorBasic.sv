@@ -14,7 +14,7 @@ module interpolator
   always_ff @(posedge clock) begin
     if (~reset_n) begin
       //Set everything in the buffer to 0 on reset, so we know what's in it
-      data_buffer = 256'b0;
+      data_buffer <= 64'b0;
     end
     else begin
       //Otherwise we'd like to move the data buffer along
@@ -85,6 +85,7 @@ endmodule: getCval
 
 
 module interpol_test;
+  //(input logic clock, reset_n);
 
   logic [ 7:0] data_in ;
   logic [ 7:0] data_out;
@@ -109,92 +110,93 @@ module interpol_test;
   end
 
   //Places to store our pixels
-  logic [255:0][7:0] pixels ;
-  logic [255:0][13:0] aSubPix;
-  logic [255:0][13:0] bSubPix;
-  logic [255:0][13:0] cSubPix;
-  logic [255:0][13:0] dSubPix;
-  logic [255:0][13:0] hSubPix;
-  logic [255:0][13:0] nSubPix;
-  logic [255:0][13:0] eSubPix;
-  logic [255:0][13:0] fSubPix;
-  logic [255:0][13:0] gSubPix;
-  logic [255:0][13:0] iSubPix;
-  logic [255:0][13:0] jSubPix;
-  logic [255:0][13:0] kSubPix;
-  logic [255:0][13:0] pSubPix;
-  logic [255:0][13:0] qSubPix;
-  logic [255:0][13:0] rSubPix;
+  logic [0:255][ 7:0] pixels ;
+  logic [0:255][13:0] aSubPix;
+  logic [0:255][13:0] bSubPix;
+  logic [0:255][13:0] cSubPix;
+  logic [0:255][13:0] dSubPix;
+  logic [0:255][13:0] hSubPix;
+  logic [0:255][13:0] nSubPix;
+  logic [0:255][13:0] eSubPix;
+  logic [0:255][13:0] fSubPix;
+  logic [0:255][13:0] gSubPix;
+  logic [0:255][13:0] iSubPix;
+  logic [0:255][13:0] jSubPix;
+  logic [0:255][13:0] kSubPix;
+  logic [0:255][13:0] pSubPix;
+  logic [0:255][13:0] qSubPix;
+  logic [0:255][13:0] rSubPix;
 
 
-  assign pixels = {32'd0  , 32'd8  , 32'd17 , 32'd25 , 32'd34 , 32'd42 , 
-                   32'd51 , 32'd59 , 32'd68 , 32'd76 , 32'd85 , 32'd93 , 
-                   32'd102, 32'd110, 32'd119, 32'd127, 32'd8  , 32'd17 , 
-                   32'd25 , 32'd34 , 32'd42 , 32'd51 , 32'd59 , 32'd68 , 
-                   32'd76 , 32'd85 , 32'd93 , 32'd102, 32'd110, 32'd119, 
-                   32'd127, 32'd136, 32'd17 , 32'd25 , 32'd34 , 32'd42 , 
-                   32'd51 , 32'd59 , 32'd68 , 32'd76 , 32'd85 , 32'd93 , 
-                   32'd102, 32'd110, 32'd119, 32'd127, 32'd136, 32'd144,
-                   32'd25 , 32'd34 , 32'd42 , 32'd51 , 32'd59 , 32'd68 , 
-                   32'd76 , 32'd85 , 32'd93 , 32'd102, 32'd110, 32'd119, 
-                   32'd127, 32'd136, 32'd144, 32'd153, 32'd34 , 32'd42 , 
-                   32'd51 , 32'd59 , 32'd68 , 32'd76 , 32'd85 , 32'd93 , 
-                   32'd102, 32'd110, 32'd119, 32'd127, 32'd136, 32'd144, 
-                   32'd153, 32'd161, 32'd42 , 32'd51 , 32'd59 , 32'd68 , 
-                   32'd76 , 32'd85 , 32'd93 , 32'd102, 32'd110, 32'd119, 
-                   32'd127, 32'd136, 32'd144, 32'd153, 32'd161, 32'd170,
-                   32'd51 , 32'd59 , 32'd68 , 32'd76 , 32'd85 , 32'd93 , 
-                   32'd102, 32'd110, 32'd119, 32'd127, 32'd136, 32'd144, 
-                   32'd153, 32'd161, 32'd170, 32'd178, 32'd59 , 32'd68 , 
-                   32'd76 , 32'd85 , 32'd93 , 32'd102, 32'd110, 32'd119, 
-                   32'd127, 32'd136, 32'd144, 32'd153, 32'd161, 32'd170, 
-                   32'd178, 32'd187, 32'd68 , 32'd76 , 32'd85 , 32'd93 , 
-                   32'd102, 32'd110, 32'd119, 32'd127, 32'd136, 32'd144, 
-                   32'd153, 32'd161, 32'd170, 32'd178, 32'd187, 32'd195,
-                   32'd76 , 32'd85 , 32'd93 , 32'd102, 32'd110, 32'd119, 
-                   32'd127, 32'd136, 32'd144, 32'd153, 32'd161, 32'd170, 
-                   32'd178, 32'd187, 32'd195, 32'd204, 32'd85 , 32'd93 , 
-                   32'd102, 32'd110, 32'd119, 32'd127, 32'd136, 32'd144, 
-                   32'd153, 32'd161, 32'd170, 32'd178, 32'd187, 32'd195, 
-                   32'd204, 32'd212, 32'd93 , 32'd102, 32'd110, 32'd119, 
-                   32'd127, 32'd136, 32'd144, 32'd153, 32'd161, 32'd170, 
-                   32'd178, 32'd187, 32'd195, 32'd204, 32'd212, 32'd221,
-                   32'd102, 32'd110, 32'd119, 32'd127, 32'd136, 32'd144, 
-                   32'd153, 32'd161, 32'd170, 32'd178, 32'd187, 32'd195, 
-                   32'd204, 32'd212, 32'd221, 32'd229, 32'd110, 32'd119, 
-                   32'd127, 32'd136, 32'd144, 32'd153, 32'd161, 32'd170, 
-                   32'd178, 32'd187, 32'd195, 32'd204, 32'd212, 32'd221, 
-                   32'd229, 32'd238, 32'd119, 32'd127, 32'd136, 32'd144, 
-                   32'd153, 32'd161, 32'd170, 32'd178, 32'd187, 32'd195, 
-                   32'd204, 32'd212, 32'd221, 32'd229, 32'd238, 32'd246,
-                   32'd127, 32'd136, 32'd144, 32'd153, 32'd161, 32'd170, 
-                   32'd178, 32'd187, 32'd195, 32'd204, 32'd212, 32'd221, 
-                   32'd229, 32'd238, 32'd246, 32'd255                   };
+  assign pixels = {8'd0  , 8'd8  , 8'd17 , 8'd25 , 8'd34 , 8'd42 , 
+                   8'd51 , 8'd59 , 8'd68 , 8'd76 , 8'd85 , 8'd93 , 
+                   8'd102, 8'd110, 8'd119, 8'd127, 8'd8  , 8'd17 , 
+                   8'd25 , 8'd34 , 8'd42 , 8'd51 , 8'd59 , 8'd68 , 
+                   8'd76 , 8'd85 , 8'd93 , 8'd102, 8'd110, 8'd119, 
+                   8'd127, 8'd136, 8'd17 , 8'd25 , 8'd34 , 8'd42 , 
+                   8'd51 , 8'd59 , 8'd68 , 8'd76 , 8'd85 , 8'd93 , 
+                   8'd102, 8'd110, 8'd119, 8'd127, 8'd136, 8'd144,
+                   8'd25 , 8'd34 , 8'd42 , 8'd51 , 8'd59 , 8'd68 , 
+                   8'd76 , 8'd85 , 8'd93 , 8'd102, 8'd110, 8'd119, 
+                   8'd127, 8'd136, 8'd144, 8'd153, 8'd34 , 8'd42 , 
+                   8'd51 , 8'd59 , 8'd68 , 8'd76 , 8'd85 , 8'd93 , 
+                   8'd102, 8'd110, 8'd119, 8'd127, 8'd136, 8'd144, 
+                   8'd153, 8'd161, 8'd42 , 8'd51 , 8'd59 , 8'd68 , 
+                   8'd76 , 8'd85 , 8'd93 , 8'd102, 8'd110, 8'd119, 
+                   8'd127, 8'd136, 8'd144, 8'd153, 8'd161, 8'd170,
+                   8'd51 , 8'd59 , 8'd68 , 8'd76 , 8'd85 , 8'd93 , 
+                   8'd102, 8'd110, 8'd119, 8'd127, 8'd136, 8'd144, 
+                   8'd153, 8'd161, 8'd170, 8'd178, 8'd59 , 8'd68 , 
+                   8'd76 , 8'd85 , 8'd93 , 8'd102, 8'd110, 8'd119, 
+                   8'd127, 8'd136, 8'd144, 8'd153, 8'd161, 8'd170, 
+                   8'd178, 8'd187, 8'd68 , 8'd76 , 8'd85 , 8'd93 , 
+                   8'd102, 8'd110, 8'd119, 8'd127, 8'd136, 8'd144, 
+                   8'd153, 8'd161, 8'd170, 8'd178, 8'd187, 8'd195,
+                   8'd76 , 8'd85 , 8'd93 , 8'd102, 8'd110, 8'd119, 
+                   8'd127, 8'd136, 8'd144, 8'd153, 8'd161, 8'd170, 
+                   8'd178, 8'd187, 8'd195, 8'd204, 8'd85 , 8'd93 , 
+                   8'd102, 8'd110, 8'd119, 8'd127, 8'd136, 8'd144, 
+                   8'd153, 8'd161, 8'd170, 8'd178, 8'd187, 8'd195, 
+                   8'd204, 8'd212, 8'd93 , 8'd102, 8'd110, 8'd119, 
+                   8'd127, 8'd136, 8'd144, 8'd153, 8'd161, 8'd170, 
+                   8'd178, 8'd187, 8'd195, 8'd204, 8'd212, 8'd221,
+                   8'd102, 8'd110, 8'd119, 8'd127, 8'd136, 8'd144, 
+                   8'd153, 8'd161, 8'd170, 8'd178, 8'd187, 8'd195, 
+                   8'd204, 8'd212, 8'd221, 8'd229, 8'd110, 8'd119, 
+                   8'd127, 8'd136, 8'd144, 8'd153, 8'd161, 8'd170, 
+                   8'd178, 8'd187, 8'd195, 8'd204, 8'd212, 8'd221, 
+                   8'd229, 8'd238, 8'd119, 8'd127, 8'd136, 8'd144, 
+                   8'd153, 8'd161, 8'd170, 8'd178, 8'd187, 8'd195, 
+                   8'd204, 8'd212, 8'd221, 8'd229, 8'd238, 8'd246,
+                   8'd127, 8'd136, 8'd144, 8'd153, 8'd161, 8'd170, 
+                   8'd178, 8'd187, 8'd195, 8'd204, 8'd212, 8'd221, 
+                   8'd229, 8'd238, 8'd246, 8'd255                   };
 
 
   initial begin
     @(posedge clock);
     reset_n = 1;
-    data_in = pixels[255];
+    data_in <= pixels[0];
 
 
     /*************************ABC Interpolation*********************/
     //Loop over all of the pixels we have an save the values of subpixels
     for (i = 0; i < 16; i++) begin
-      //fill buffer with first pixel
-      for (j = 0; j < 8; j++) begin
-        data_in <= pixels[255-i*16];
-        @(posedge clock);
-      end
       //Fill buffer with new pixels or end of row pixel
-      for (k = 0; k < 21; k++) begin
-        if (k > 4) begin
-          aSubPix[i*16+k-5] <= I.aValue[19:6];
-          bSubPix[i*16+k-5] <= I.bValue[19:6];
-          cSubPix[i*16+k-5] <= I.cValue[19:6];         
+      for (k = 0; k < 29; k++) begin
+        if (k < 7) begin
+          data_in <= pixels[i*16];
         end
-        if (k < 16) begin
-          data_in <= pixels[255-i*16-k];
+        if (k > 6 & k < 23) begin
+          data_in <= pixels[i*16+k-7];
+        end
+        if (k > 22) begin
+          data_in <= pixels[i*16+15];
+        end
+        if (k > 12) begin
+          aSubPix[i*16+k-13] <= I.aValue[19:6];
+          bSubPix[i*16+k-13] <= I.bValue[19:6];
+          cSubPix[i*16+k-13] <= I.cValue[19:6];         
         end
         @(posedge clock);
       end
@@ -202,21 +204,21 @@ module interpol_test;
 
     /*****************************DHN Interpolation**********************/
     for (i = 0; i < 16; i++) begin
-      //fill buffer with the first pixel
-      for (j = 0; j < 8; j++) begin
-        data_in <= pixels[255-i];
-        @(posedge clock);
-      end
-
       //Fill buffer with new pixels or end of col pixel
-      for (k = 0; k < 21; k++) begin
-        if (k > 4) begin
-          dSubPix[i+16*(k-5)] <= I.aValue[19:6];
-          hSubPix[i+16*(k-5)] <= I.bValue[19:6];
-          nSubPix[i+16*(k-5)] <= I.cValue[19:6];
+      for (k = 0; k < 29; k++) begin
+        if (k < 7) begin
+          data_in <= pixels[i];
         end
-        if (k < 16) begin
-          data_in <= pixels[255-i-16*k];
+        if (k > 6 & k < 23) begin
+          data_in <= pixels[(k-7)*16+i]; 
+        end
+        if (k > 22) begin
+          data_in <= pixels[240+i];
+        end
+        if (k > 12) begin
+          dSubPix[i+16*(k-13)] <= I.aValue[19:6];
+          hSubPix[i+16*(k-13)] <= I.bValue[19:6];
+          nSubPix[i+16*(k-13)] <= I.cValue[19:6];
         end
         @(posedge clock);
       end
@@ -224,21 +226,21 @@ module interpol_test;
 
     /************************EIP Interpolation************************/
     for (i = 0; i < 16; i++) begin
-      //fill buffer with the first pixel
-      for (j = 0; j < 8; j++) begin
-        data_in <= aSubPix[255-i];
-        @(posedge clock);
-      end
-
       //Fill buffer with new pixels or end of col pixel
-      for (k = 0; k < 21; k++) begin
-        if (k > 4) begin
-          eSubPix[i+16*(k-5)] <= I.aValue[19:6];
-          iSubPix[i+16*(k-5)] <= I.bValue[19:6];
-          pSubPix[i+16*(k-5)] <= I.cValue[19:6];
+      for (k = 0; k < 29; k++) begin
+        if (k < 7) begin
+          data_in <= aSubPix[i];
         end
-        if (k < 16) begin
-          data_in <= aSubPix[255-i-16*k];
+        if (k > 6 & k < 23) begin
+          data_in <= aSubPix[(k-7)*16+i];
+        end
+        if (k > 22) begin
+          data_in <= aSubPix[240+i];
+        end
+        if (k > 12) begin
+          eSubPix[i+16*(k-13)] <= I.aValue[19:6];
+          iSubPix[i+16*(k-13)] <= I.bValue[19:6];
+          pSubPix[i+16*(k-13)] <= I.cValue[19:6];
         end
         @(posedge clock);
       end
@@ -246,21 +248,21 @@ module interpol_test;
 
     /*********************FJQ Interpolation******************/
     for (i = 0; i < 16; i++) begin
-      //fill buffer with the first pixel
-      for (j = 0; j < 8; j++) begin
-        data_in <= bSubPix[255-i];
-        @(posedge clock);
-      end
-
       //Fill buffer with new pixels or end of col pixel
-      for (k = 0; k < 21; k++) begin
-        if (k > 4) begin
-          fSubPix[i+16*(k-5)] <= I.aValue[19:6];
-          jSubPix[i+16*(k-5)] <= I.bValue[19:6];
-          qSubPix[i+16*(k-5)] <= I.cValue[19:6];
+      for (k = 0; k < 29; k++) begin
+        if (k < 7) begin
+          data_in <= bSubPix[i];
         end
-        if (k < 16) begin
-          data_in <= bSubPix[255-i-16*k];
+        if (k > 6 & k < 23) begin
+          data_in <= bSubPix[(k-7)*16+i];
+        end
+        if (k > 22) begin
+          data_in <= bSubPix[240+i];
+        end
+        if (k > 12) begin
+          fSubPix[i+16*(k-13)] <= I.aValue[19:6];
+          jSubPix[i+16*(k-13)] <= I.bValue[19:6];
+          qSubPix[i+16*(k-13)] <= I.cValue[19:6];
         end
         @(posedge clock);
       end
@@ -268,21 +270,21 @@ module interpol_test;
 
     /*****************************GKR Interpolation**************************/
     for (i = 0; i < 16; i++) begin
-      //fill buffer with the first pixel
-      for (j = 0; j < 8; j++) begin
-        data_in <= cSubPix[255-i];
-        @(posedge clock);
-      end
-
       //Fill buffer with new pixels or end of col pixel
-      for (k = 0; k < 21; k++) begin
-        if (k > 4) begin
-          gSubPix[i+16*(k-5)] <= I.aValue[19:6];
-          kSubPix[i+16*(k-5)] <= I.bValue[19:6];
-          rSubPix[i+16*(k-5)] <= I.cValue[19:6];
+      for (k = 0; k < 29; k++) begin
+        if (k < 7) begin
+          data_in <= cSubPix[i];
         end
-        if (k < 16) begin
-          data_in <= cSubPix[255-i-16*k];
+        if (k > 6 & k < 23) begin
+          data_in <= cSubPix[(k-7)*16+i];
+        end
+        if (k > 22) begin
+          data_in <= cSubPix[240+i];
+        end
+        if (k > 12) begin
+          gSubPix[i+16*(k-13)] <= I.aValue[19:6];
+          kSubPix[i+16*(k-13)] <= I.bValue[19:6];
+          rSubPix[i+16*(k-13)] <= I.cValue[19:6];
         end
         @(posedge clock);
       end
@@ -292,22 +294,22 @@ module interpol_test;
 
 
     for (i = 0; i < 256; i++) begin
-      $display("%d", pixels [    i]);
-      $display("%d", aSubPix[255-i]);
-      $display("%d", bSubPix[255-i]);
-      $display("%d", cSubPix[255-i]);
-      $display("%d", dSubPix[    i]);
-      $display("%d", eSubPix[    i]);
-      $display("%d", fSubPix[    i]);
-      $display("%d", gSubPix[    i]);
-      $display("%d", hSubPix[    i]);
-      $display("%d", iSubPix[    i]);
-      $display("%d", jSubPix[    i]);
-      $display("%d", kSubPix[    i]);
-      $display("%d", nSubPix[    i]);
-      $display("%d", pSubPix[    i]);
-      $display("%d", qSubPix[    i]);
-      $display("%d", rSubPix[    i]);
+      $display("%d", pixels [i]);
+      $display("%d", aSubPix[i]);
+      $display("%d", bSubPix[i]);
+      $display("%d", cSubPix[i]);
+      $display("%d", dSubPix[i]);
+      $display("%d", eSubPix[i]);
+      $display("%d", fSubPix[i]);
+      $display("%d", gSubPix[i]);
+      $display("%d", hSubPix[i]);
+      $display("%d", iSubPix[i]);
+      $display("%d", jSubPix[i]);
+      $display("%d", kSubPix[i]);
+      $display("%d", nSubPix[i]);
+      $display("%d", pSubPix[i]);
+      $display("%d", qSubPix[i]);
+      $display("%d", rSubPix[i]);
     end
 
   $finish;

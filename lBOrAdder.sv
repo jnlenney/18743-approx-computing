@@ -1,7 +1,7 @@
 `default_nettype none
 
 module lowerBitAdder
- #(parameter lowerBits = 5);
+ #(parameter lowerBits = 5)
   (input  logic [31:0] A, B,
    output logic [31:0] Out  );
 
@@ -10,4 +10,4 @@ module lowerBitAdder
   assign Out[31:lowerBits] = A[31:lowerBits] + B[31:lowerBits];
 
 
-endmodule lowerBitAdder
+endmodule: lowerBitAdder
