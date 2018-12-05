@@ -9,7 +9,7 @@ Report : power
         -analysis_effort low
 Design : interpolator
 Version: J-2014.09-SP4
-Date   : Thu Oct 25 10:51:31 2018
+Date   : Wed Dec  5 02:33:31 2018
 ****************************************
 
 
@@ -31,12 +31,12 @@ Power-specific unit information :
     Leakage Power Units = 1pW
 
 
-  Cell Internal Power  =   1.8818 mW  (100%)
-  Net Switching Power  =   5.6738 uW    (0%)
+  Cell Internal Power  = 470.5148 uW  (100%)
+  Net Switching Power  =   1.4236 uW    (0%)
                          ---------
-Total Dynamic Power    =   1.8875 mW  (100%)
+Total Dynamic Power    = 471.9384 uW  (100%)
 
-Cell Leakage Power     =  63.1889 nW
+Cell Leakage Power     =  15.7972 nW
 
 
                  Internal         Switching           Leakage            Total
@@ -46,9 +46,9 @@ io_pad             0.0000            0.0000            0.0000            0.0000 
 memory             0.0000            0.0000            0.0000            0.0000  (   0.00%)
 black_box          0.0000            0.0000            0.0000            0.0000  (   0.00%)
 clock_network      0.0000            0.0000            0.0000            0.0000  (   0.00%)
-register           1.8818        5.6738e-03        6.3189e+04            1.8875  ( 100.00%)
+register           0.4705        1.4236e-03        1.5797e+04            0.4720  ( 100.00%)
 sequential         0.0000            0.0000            0.0000            0.0000  (   0.00%)
 combinational      0.0000            0.0000            0.0000            0.0000  (   0.00%)
 --------------------------------------------------------------------------------------------------
-Total              1.8818 mW     5.6738e-03 mW     6.3189e+04 pW         1.8875 mW
+Total              0.4705 mW     1.4236e-03 mW     1.5797e+04 pW         0.4720 mW
 1
