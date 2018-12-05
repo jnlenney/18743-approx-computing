@@ -1,0 +1,41 @@
+# 18-341 Synopsys DC Script
+# Homework 6
+# Andy Orinvert
+
+# ================================ SETUP =================================
+
+set target_library /afs/ece/class/ece341/setup/Artisan/typical.db
+set link_library /afs/ece/class/ece341/setup/Artisan/typical.db
+
+define_design_lib WORK -path "./work"
+
+analyze -format sverilog "interpolator_super.sv"
+elaborate "interpolator"
+current_design topDesign
+
+link
+uniquify
+
+# =============================== CLOCKING ===============================
+
+create_clock -period 10.0 clock
+
+set real_inputs [remove_from_collection [remove_from_collection [all_inputs] clock] e]
+
+set_input_delay -clock clock -max 0 $real_inputs
+set_output_delay -clock clock -max 0 [all_outputs]
+
+set_max_delay 10.0 [all_outputs]
+
+# =============================== REPORTS ================================
+
+check_design
+compile -ungroup_all -area_effort high
+
+report_area > area_xxx.rpt
+report_timing > timing_xxx.rpt
+report_power > power_xxx.rpt
+report_reference -hierarchy > ref_xxx.rpt
+write -format verilog -output netlist_xxx.sv
+
+exit

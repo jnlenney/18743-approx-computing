@@ -1,0 +1,54 @@
+Loading db file '/afs/ece/class/ece341/setup/Artisan/typical.db'
+Information: Propagating switching activity (low effort zero delay simulation). (PWR-6)
+Warning: Design has unannotated primary inputs. (PWR-414)
+Warning: Design has unannotated sequential cell outputs. (PWR-415)
+Warning: Design has unannotated black box outputs. (PWR-428)
+ 
+****************************************
+Report : power
+        -analysis_effort low
+Design : interpolator
+Version: J-2014.09-SP4
+Date   : Wed Dec  5 05:05:39 2018
+****************************************
+
+
+Library(s) Used:
+
+    typical (File: /afs/ece/class/ece341/setup/Artisan/typical.db)
+
+
+Operating Conditions: typical   Library: typical
+Wire Load Model Mode: top
+
+
+Global Operating Voltage = 1.8  
+Power-specific unit information :
+    Voltage Units = 1V
+    Capacitance Units = 1.000000pf
+    Time Units = 1ns
+    Dynamic Power Units = 1mW    (derived from V,C,T units)
+    Leakage Power Units = 1pW
+
+
+  Cell Internal Power  = 446.0221 uW   (99%)
+  Net Switching Power  =   5.0817 uW    (1%)
+                         ---------
+Total Dynamic Power    = 451.1038 uW  (100%)
+
+Cell Leakage Power     =  24.4051 nW
+
+
+                 Internal         Switching           Leakage            Total
+Power Group      Power            Power               Power              Power   (   %    )  Attrs
+--------------------------------------------------------------------------------------------------
+io_pad             0.0000            0.0000            0.0000            0.0000  (   0.00%)
+memory             0.0000            0.0000            0.0000            0.0000  (   0.00%)
+black_box          0.0000            0.0000            0.0000            0.0000  (   0.00%)
+clock_network      0.0000            0.0000            0.0000            0.0000  (   0.00%)
+register           0.4298        7.4072e-04        1.9854e+04            0.4306  (  95.45%)
+sequential         0.0000            0.0000            0.0000            0.0000  (   0.00%)
+combinational  1.6186e-02        4.3410e-03        4.5515e+03        2.0531e-02  (   4.55%)
+--------------------------------------------------------------------------------------------------
+Total              0.4460 mW     5.0817e-03 mW     2.4405e+04 pW         0.4511 mW
+1
