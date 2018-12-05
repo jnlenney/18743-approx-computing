@@ -2,15 +2,14 @@
 
 
 module interpolator
-  (input  logic [31:0] data_in,
+  (input  logic [7:0] data_in,
    input  logic        clock, reset_n,
    input  logic        ready,
-   output logic [31:0] data_out,
-   output logic [31:0] address);
+   output logic [7:0] data_out);
 
   //Store the pixels that we've seen
-  logic [7:0][31:0] data_buffer;
-  logic      [39:0] aValue, bValue, cValue;
+  logic [7:0][ 7:0] data_buffer;
+  logic      [31:0] aValue, bValue, cValue;
 
   always_ff @(posedge clock) begin
     if (~reset_n) begin
@@ -41,8 +40,8 @@ endmodule: interpolator
 //made some modules for...modularity
 //Added extra bits to the output since it can have extra bits
 module getAval
-  (input  logic [7:0][31:0] data_buffer,
-   output logic      [39:0] aValue      );
+  (input  logic [7:0][ 7:0] data_buffer,
+   output logic      [31:0] aValue      );
 
   assign aValue = - 1 * data_buffer[7]
                   + 4 * data_buffer[6]
@@ -55,8 +54,8 @@ module getAval
 endmodule: getAval
 
 module getBval
-  (input  logic [7:0][31:0] data_buffer,
-   output logic      [39:0] bValue      );
+  (input  logic [7:0][ 7:0] data_buffer,
+   output logic      [31:0] bValue      );
 
   assign bValue = - 1 * data_buffer[7]
                   + 4 * data_buffer[6]
@@ -70,8 +69,8 @@ module getBval
 endmodule: getBval
 
 module getCval
-  (input  logic [7:0][31:0] data_buffer,
-   output logic      [39:0] cValue      );
+  (input  logic [7:0][ 7:0] data_buffer,
+   output logic      [31:0] cValue      );
 
   assign cValue =   1 * data_buffer[6]
                   - 5 * data_buffer[5]
@@ -85,20 +84,20 @@ endmodule: getCval
 
 
 
-module interpol_test
-  (input  logic clock, reset_n);
+module interpol_test;
 
-  logic [31:0] addr    ;
-  logic [31:0] data_in ;
-  logic [31:0] data_out;
+  logic [ 7:0] data_in ;
+  logic [ 7:0] data_out;
   logic [31:0] i, j, k ;
+  logic        clock   ;
+  logic        reset_n ;
+
 
   interpolator I(.data_in(data_in), 
                  .clock(clock), 
                  .reset_n(reset_n), 
                  .ready(1'b1), 
-                 .data_out(data_out), 
-                 .address(addr)); 
+                 .data_out(data_out)); 
 
   //set-up
   initial begin
@@ -110,22 +109,22 @@ module interpol_test
   end
 
   //Places to store our pixels
-  logic [255:0][31:0] pixels ;
-  logic [255:0][31:0] aSubPix;
-  logic [255:0][31:0] bSubPix;
-  logic [255:0][31:0] cSubPix;
-  logic [255:0][31:0] dSubPix;
-  logic [255:0][31:0] hSubPix;
-  logic [255:0][31:0] nSubPix;
-  logic [255:0][31:0] eSubPix;
-  logic [255:0][31:0] fSubPix;
-  logic [255:0][31:0] gSubPix;
-  logic [255:0][31:0] iSubPix;
-  logic [255:0][31:0] jSubPix;
-  logic [255:0][31:0] kSubPix;
-  logic [255:0][31:0] pSubPix;
-  logic [255:0][31:0] qSubPix;
-  logic [255:0][31:0] rSubPix;
+  logic [255:0][7:0] pixels ;
+  logic [255:0][13:0] aSubPix;
+  logic [255:0][13:0] bSubPix;
+  logic [255:0][13:0] cSubPix;
+  logic [255:0][13:0] dSubPix;
+  logic [255:0][13:0] hSubPix;
+  logic [255:0][13:0] nSubPix;
+  logic [255:0][13:0] eSubPix;
+  logic [255:0][13:0] fSubPix;
+  logic [255:0][13:0] gSubPix;
+  logic [255:0][13:0] iSubPix;
+  logic [255:0][13:0] jSubPix;
+  logic [255:0][13:0] kSubPix;
+  logic [255:0][13:0] pSubPix;
+  logic [255:0][13:0] qSubPix;
+  logic [255:0][13:0] rSubPix;
 
 
   assign pixels = {32'd0  , 32'd8  , 32'd17 , 32'd25 , 32'd34 , 32'd42 , 
@@ -190,9 +189,9 @@ module interpol_test
       //Fill buffer with new pixels or end of row pixel
       for (k = 0; k < 21; k++) begin
         if (k > 4) begin
-          aSubPix[i*16+k-5] <= I.aValue[37:6];
-          bSubPix[i*16+k-5] <= I.bValue[37:6];
-          cSubPix[i*16+k-5] <= I.cValue[37:6];         
+          aSubPix[i*16+k-5] <= I.aValue[19:6];
+          bSubPix[i*16+k-5] <= I.bValue[19:6];
+          cSubPix[i*16+k-5] <= I.cValue[19:6];         
         end
         if (k < 16) begin
           data_in <= pixels[255-i*16-k];
@@ -212,9 +211,9 @@ module interpol_test
       //Fill buffer with new pixels or end of col pixel
       for (k = 0; k < 21; k++) begin
         if (k > 4) begin
-          dSubPix[i+16*(k-5)] <= I.aValue[37:6];
-          hSubPix[i+16*(k-5)] <= I.bValue[37:6];
-          nSubPix[i+16*(k-5)] <= I.cValue[37:6];
+          dSubPix[i+16*(k-5)] <= I.aValue[19:6];
+          hSubPix[i+16*(k-5)] <= I.bValue[19:6];
+          nSubPix[i+16*(k-5)] <= I.cValue[19:6];
         end
         if (k < 16) begin
           data_in <= pixels[255-i-16*k];
@@ -234,9 +233,9 @@ module interpol_test
       //Fill buffer with new pixels or end of col pixel
       for (k = 0; k < 21; k++) begin
         if (k > 4) begin
-          eSubPix[i+16*(k-5)] <= I.aValue[37:6];
-          iSubPix[i+16*(k-5)] <= I.bValue[37:6];
-          pSubPix[i+16*(k-5)] <= I.cValue[37:6];
+          eSubPix[i+16*(k-5)] <= I.aValue[19:6];
+          iSubPix[i+16*(k-5)] <= I.bValue[19:6];
+          pSubPix[i+16*(k-5)] <= I.cValue[19:6];
         end
         if (k < 16) begin
           data_in <= aSubPix[255-i-16*k];
@@ -256,9 +255,9 @@ module interpol_test
       //Fill buffer with new pixels or end of col pixel
       for (k = 0; k < 21; k++) begin
         if (k > 4) begin
-          fSubPix[i+16*(k-5)] <= I.aValue[37:6];
-          jSubPix[i+16*(k-5)] <= I.bValue[37:6];
-          qSubPix[i+16*(k-5)] <= I.cValue[37:6];
+          fSubPix[i+16*(k-5)] <= I.aValue[19:6];
+          jSubPix[i+16*(k-5)] <= I.bValue[19:6];
+          qSubPix[i+16*(k-5)] <= I.cValue[19:6];
         end
         if (k < 16) begin
           data_in <= bSubPix[255-i-16*k];
@@ -278,9 +277,9 @@ module interpol_test
       //Fill buffer with new pixels or end of col pixel
       for (k = 0; k < 21; k++) begin
         if (k > 4) begin
-          gSubPix[i+16*(k-5)] <= I.aValue[37:6];
-          kSubPix[i+16*(k-5)] <= I.bValue[37:6];
-          rSubPix[i+16*(k-5)] <= I.cValue[37:6];
+          gSubPix[i+16*(k-5)] <= I.aValue[19:6];
+          kSubPix[i+16*(k-5)] <= I.bValue[19:6];
+          rSubPix[i+16*(k-5)] <= I.cValue[19:6];
         end
         if (k < 16) begin
           data_in <= cSubPix[255-i-16*k];
