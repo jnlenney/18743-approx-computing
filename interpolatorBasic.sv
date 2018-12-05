@@ -1,5 +1,9 @@
 `default_nettype none
 
+//Some macros
+`define WIDTH  16
+`define HEIGHT 16
+
 
 module interpolator
   (input  logic [7:0] data_in,
@@ -181,110 +185,110 @@ module interpol_test;
 
     /*************************ABC Interpolation*********************/
     //Loop over all of the pixels we have an save the values of subpixels
-    for (i = 0; i < 16; i++) begin
+    for (i = 0; i < `HEIGHT; i++) begin
       //Fill buffer with new pixels or end of row pixel
-      for (k = 0; k < 29; k++) begin
+      for (k = 0; k < `WIDTH+13; k++) begin
         if (k < 7) begin
-          data_in <= pixels[i*16];
+          data_in <= pixels[i*`WIDTH];
         end
-        if (k > 6 & k < 23) begin
-          data_in <= pixels[i*16+k-7];
+        if (k > 6 & k < `WIDTH+7) begin
+          data_in <= pixels[i*`WIDTH+k-7];
         end
-        if (k > 22) begin
-          data_in <= pixels[i*16+15];
+        if (k > `WIDTH+6) begin
+          data_in <= pixels[i*`WIDTH+15];
         end
         if (k > 12) begin
-          aSubPix[i*16+k-13] <= I.aValue[19:6];
-          bSubPix[i*16+k-13] <= I.bValue[19:6];
-          cSubPix[i*16+k-13] <= I.cValue[19:6];         
+          aSubPix[i*`WIDTH+k-13] <= I.aValue[19:6];
+          bSubPix[i*`WIDTH+k-13] <= I.bValue[19:6];
+          cSubPix[i*`WIDTH+k-13] <= I.cValue[19:6];         
         end
         @(posedge clock);
       end
     end
 
     /*****************************DHN Interpolation**********************/
-    for (i = 0; i < 16; i++) begin
+    for (i = 0; i < `HEIGHT; i++) begin
       //Fill buffer with new pixels or end of col pixel
-      for (k = 0; k < 29; k++) begin
+      for (k = 0; k < `WIDTH+13; k++) begin
         if (k < 7) begin
           data_in <= pixels[i];
         end
-        if (k > 6 & k < 23) begin
-          data_in <= pixels[(k-7)*16+i]; 
+        if (k > 6 & k < `WIDTH+7) begin
+          data_in <= pixels[(k-7)*`WIDTH+i]; 
         end
-        if (k > 22) begin
-          data_in <= pixels[240+i];
+        if (k > `WIDTH+6) begin
+          data_in <= pixels[`WIDTH*(`HEIGHT-1)+i];
         end
         if (k > 12) begin
-          dSubPix[i+16*(k-13)] <= I.aValue[19:6];
-          hSubPix[i+16*(k-13)] <= I.bValue[19:6];
-          nSubPix[i+16*(k-13)] <= I.cValue[19:6];
+          dSubPix[i+`WIDTH*(k-13)] <= I.aValue[19:6];
+          hSubPix[i+`WIDTH*(k-13)] <= I.bValue[19:6];
+          nSubPix[i+`WIDTH*(k-13)] <= I.cValue[19:6];
         end
         @(posedge clock);
       end
     end
 
     /************************EIP Interpolation************************/
-    for (i = 0; i < 16; i++) begin
+    for (i = 0; i < `HEIGHT; i++) begin
       //Fill buffer with new pixels or end of col pixel
-      for (k = 0; k < 29; k++) begin
+      for (k = 0; k < `WIDTH+13; k++) begin
         if (k < 7) begin
           data_in <= aSubPix[i];
         end
-        if (k > 6 & k < 23) begin
-          data_in <= aSubPix[(k-7)*16+i];
+        if (k > 6 & k < `WIDTH+7) begin
+          data_in <= aSubPix[(k-7)*`WIDTH+i];
         end
-        if (k > 22) begin
-          data_in <= aSubPix[240+i];
+        if (k > `WIDTH+6) begin
+          data_in <= aSubPix[`WIDTH*(`HEIGHT-1)+i];
         end
         if (k > 12) begin
-          eSubPix[i+16*(k-13)] <= I.aValue[19:6];
-          iSubPix[i+16*(k-13)] <= I.bValue[19:6];
-          pSubPix[i+16*(k-13)] <= I.cValue[19:6];
+          eSubPix[i+`WIDTH*(k-13)] <= I.aValue[19:6];
+          iSubPix[i+`WIDTH*(k-13)] <= I.bValue[19:6];
+          pSubPix[i+`WIDTH*(k-13)] <= I.cValue[19:6];
         end
         @(posedge clock);
       end
     end
 
     /*********************FJQ Interpolation******************/
-    for (i = 0; i < 16; i++) begin
+    for (i = 0; i < `HEIGHT; i++) begin
       //Fill buffer with new pixels or end of col pixel
-      for (k = 0; k < 29; k++) begin
+      for (k = 0; k < `WIDTH+13; k++) begin
         if (k < 7) begin
           data_in <= bSubPix[i];
         end
-        if (k > 6 & k < 23) begin
-          data_in <= bSubPix[(k-7)*16+i];
+        if (k > 6 & k < `WIDTH+7) begin
+          data_in <= bSubPix[(k-7)*`WIDTH+i];
         end
-        if (k > 22) begin
-          data_in <= bSubPix[240+i];
+        if (k > `WIDTH+6) begin
+          data_in <= bSubPix[`WIDTH*(`HEIGHT-1)+i];
         end
         if (k > 12) begin
-          fSubPix[i+16*(k-13)] <= I.aValue[19:6];
-          jSubPix[i+16*(k-13)] <= I.bValue[19:6];
-          qSubPix[i+16*(k-13)] <= I.cValue[19:6];
+          fSubPix[i+`WIDTH*(k-13)] <= I.aValue[19:6];
+          jSubPix[i+`WIDTH*(k-13)] <= I.bValue[19:6];
+          qSubPix[i+`WIDTH*(k-13)] <= I.cValue[19:6];
         end
         @(posedge clock);
       end
     end
 
     /*****************************GKR Interpolation**************************/
-    for (i = 0; i < 16; i++) begin
+    for (i = 0; i < `HEIGHT; i++) begin
       //Fill buffer with new pixels or end of col pixel
-      for (k = 0; k < 29; k++) begin
+      for (k = 0; k < `WIDTH+13; k++) begin
         if (k < 7) begin
           data_in <= cSubPix[i];
         end
-        if (k > 6 & k < 23) begin
-          data_in <= cSubPix[(k-7)*16+i];
+        if (k > 6 & k < `WIDTH+7) begin
+          data_in <= cSubPix[(k-7)*`WIDTH+i];
         end
-        if (k > 22) begin
-          data_in <= cSubPix[240+i];
+        if (k > `WIDTH+6) begin
+          data_in <= cSubPix[`WIDTH*(`HEIGHT-1)+i];
         end
         if (k > 12) begin
-          gSubPix[i+16*(k-13)] <= I.aValue[19:6];
-          kSubPix[i+16*(k-13)] <= I.bValue[19:6];
-          rSubPix[i+16*(k-13)] <= I.cValue[19:6];
+          gSubPix[i+`WIDTH*(k-13)] <= I.aValue[19:6];
+          kSubPix[i+`WIDTH*(k-13)] <= I.bValue[19:6];
+          rSubPix[i+`WIDTH*(k-13)] <= I.cValue[19:6];
         end
         @(posedge clock);
       end
@@ -293,7 +297,7 @@ module interpol_test;
 
 
 
-    for (i = 0; i < 256; i++) begin
+    for (i = 0; i < `WIDTH*`HEIGHT; i++) begin
       $display("%d", pixels [i]);
       $display("%d", aSubPix[i]);
       $display("%d", bSubPix[i]);
