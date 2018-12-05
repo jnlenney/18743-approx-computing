@@ -312,3 +312,202 @@ module getCval
                    sums[6]};
 
 endmodule: getCval
+
+
+
+
+module getAvalMirrorAdd
+  (input  logic [7:0][31:0] data_buffer,
+   output logic      [39:0] aValue      );
+
+  assign aValue[39:32] = 8'b0;
+
+  logic products [0:6][31:0];
+
+  assign products[6] = - 1 * data_buffer[7];
+  assign products[5] = 4 * data_buffer[6];
+  assign products[4] = -10 * data_buffer[5];
+  assign products[3] = 58 * data_buffer[4];
+  assign products[2] = 17 * data_buffer[3];
+  assign products[1] = - 5 * data_buffer[2];
+  assign products[0] = 1 * data_buffer[1];
+
+  logic [2:0][31:0] level1sums;
+
+  approxMirrorAdder addr0(.A(products[6]), .B(products[5]), .Out[level1sums[0]]);
+  approxMirrorAdder addr1(.A(products[4]), .B(products[3]), .Out[level1sums[1]]);
+  approxMirrorAdder addr2(.A(products[2]), .B(products[1]), .Out[level1sums[2]]);
+
+  logic [1:0][31:0] level2sums;
+
+  approxMirrorAdder addr3(.A(level1sums[2]), .B(level1sums[1]), .Out[level2sums[0]]);
+  approxMirrorAdder addr4(.A(level1sums[0]), .B(products[0]), .Out[level2sums[1]]);
+
+  approxMirrorAdder addr5(.A(level2sums[1]), .B(level2sums[0]), .Out(aValue[31:0]));
+
+endmodule: getAvalMirrorAdd
+
+module getBvalMirrorAdd
+  (input  logic [7:0][31:0] data_buffer,
+   output logic      [39:0] bValue      );
+
+  assign bValue[39:32] = 8'b0;
+
+  logic products [0:7][31:0];
+
+  assign products[7] = -1 * data_buffer[7];
+  assign products[6] = 4 * data_buffer[6];
+  assign products[5] = -11 * data_buffer[5];
+  assign products[4] = 40 * data_buffer[4];
+  assign products[3] = 40 * data_buffer[3];
+  assign products[2] = -11 * data_buffer[2];
+  assign products[1] = 4 * data_buffer[1];
+  assign products[0] = -1 * data_buffer[0];
+
+  logic [3:0][31:0] level1sums;
+
+  approxMirrorAdder addr0(.A(products[6]), .B(products[7]), .Out[level1sums[0]]);
+  approxMirrorAdder addr1(.A(products[4]), .B(products[5]), .Out[level1sums[1]]);
+  approxMirrorAdder addr2(.A(products[2]), .B(products[3]), .Out[level1sums[2]]);
+  approxMirrorAdder addr3(.A(products[0]), .B(products[1]), .Out[level1sums[3]]);
+
+  logic [1:0][31:0] level2sums;
+
+  approxMirrorAdder addr4(.A(level1sums[0]), .B(level1sums[1]), .Out[level2sums[0]]);
+  approxMirrorAdder addr5(.A(level1sums[2]), .B(level1sums[3]), .Out[level2sums[1]]);
+
+  approxMirrorAdder addr6(.A(level2sums[1]), .B(level2sums[0]), .Out(bValue[31:0]));
+
+endmodule: getBvalMirrorAdd
+
+module getCvalMirrorAdd
+  (input  logic [7:0][31:0] data_buffer,
+   output logic      [39:0] cValue      );
+
+  assign cValue[39:32] = 8'b0;
+
+  logic products [0:6][31:0];
+
+  assign products[6] = 1 * data_buffer[6];
+  assign products[5] = -5 * data_buffer[5];
+  assign products[4] = 17 * data_buffer[4];
+  assign products[3] = 58 * data_buffer[3];
+  assign products[2] = -10 * data_buffer[2];
+  assign products[1] = 4 * data_buffer[1];
+  assign products[0] = -1 * data_buffer[0];
+
+  logic [2:0][31:0] level1sums;
+
+  approxMirrorAdder addr0(.A(products[6]), .B(products[5]), .Out[level1sums[0]]);
+  approxMirrorAdder addr1(.A(products[4]), .B(products[3]), .Out[level1sums[1]]);
+  approxMirrorAdder addr2(.A(products[2]), .B(products[1]), .Out[level1sums[2]]);
+
+  logic [1:0][31:0] level2sums;
+
+  approxMirrorAdder addr3(.A(level1sums[2]), .B(level1sums[1]), .Out[level2sums[0]]);
+  approxMirrorAdder addr4(.A(level1sums[0]), .B(products[0]), .Out[level2sums[1]]);
+
+  approxMirrorAdder addr5(.A(level2sums[1]), .B(level2sums[0]), .Out(cValue[31:0]));
+
+endmodule: getCvalMirrorAdd
+
+
+
+
+module getAvalLowerBit
+  (input  logic [7:0][31:0] data_buffer,
+   output logic      [39:0] aValue      );
+
+  assign aValue[39:32] = 8'b0;
+
+  logic products [0:6][31:0];
+
+  assign products[6] = - 1 * data_buffer[7];
+  assign products[5] = 4 * data_buffer[6];
+  assign products[4] = -10 * data_buffer[5];
+  assign products[3] = 58 * data_buffer[4];
+  assign products[2] = 17 * data_buffer[3];
+  assign products[1] = - 5 * data_buffer[2];
+  assign products[0] = 1 * data_buffer[1];
+
+  logic [2:0][31:0] level1sums;
+
+  lowerBitAdder #(8) addr0(.A(products[6]), .B(products[5]), .Out[level1sums[0]]);
+  lowerBitAdder #(8) addr1(.A(products[4]), .B(products[3]), .Out[level1sums[1]]);
+  lowerBitAdder #(8) addr2(.A(products[2]), .B(products[1]), .Out[level1sums[2]]);
+
+  logic [1:0][31:0] level2sums;
+
+  lowerBitAdder #(8) addr3(.A(level1sums[2]), .B(level1sums[1]), .Out[level2sums[0]]);
+  lowerBitAdder #(8) addr4(.A(level1sums[0]), .B(products[0]), .Out[level2sums[1]]);
+
+  lowerBitAdder #(8) addr5(.A(level2sums[1]), .B(level2sums[0]), .Out(aValue[31:0]));
+
+endmodule: getAvalLowerBit
+
+module getBvalLowerBit
+  (input  logic [7:0][31:0] data_buffer,
+   output logic      [39:0] bValue      );
+
+  assign bValue[39:32] = 8'b0;
+
+  logic products [0:7][31:0];
+
+  assign products[7] = -1 * data_buffer[7];
+  assign products[6] = 4 * data_buffer[6];
+  assign products[5] = -11 * data_buffer[5];
+  assign products[4] = 40 * data_buffer[4];
+  assign products[3] = 40 * data_buffer[3];
+  assign products[2] = -11 * data_buffer[2];
+  assign products[1] = 4 * data_buffer[1];
+  assign products[0] = -1 * data_buffer[0];
+
+  logic [3:0][31:0] level1sums;
+
+  lowerBitAdder #(8) addr0(.A(products[6]), .B(products[7]), .Out[level1sums[0]]);
+  lowerBitAdder #(8) addr1(.A(products[4]), .B(products[5]), .Out[level1sums[1]]);
+  lowerBitAdder #(8) addr2(.A(products[2]), .B(products[3]), .Out[level1sums[2]]);
+  lowerBitAdder #(8) addr3(.A(products[0]), .B(products[1]), .Out[level1sums[3]]);
+
+  logic [1:0][31:0] level2sums;
+
+  lowerBitAdder #(8) addr4(.A(level1sums[0]), .B(level1sums[1]), .Out[level2sums[0]]);
+  lowerBitAdder #(8) addr5(.A(level1sums[2]), .B(level1sums[3]), .Out[level2sums[1]]);
+
+  lowerBitAdder #(8) addr6(.A(level2sums[1]), .B(level2sums[0]), .Out(bValue[31:0]));
+
+endmodule: getBvalLowerBit
+
+module getCvalLowerBit
+  (input  logic [7:0][31:0] data_buffer,
+   output logic      [39:0] cValue      );
+
+  assign cValue[39:32] = 8'b0;
+
+  logic products [0:6][31:0];
+
+  assign products[6] = 1 * data_buffer[6];
+  assign products[5] = -5 * data_buffer[5];
+  assign products[4] = 17 * data_buffer[4];
+  assign products[3] = 58 * data_buffer[3];
+  assign products[2] = -10 * data_buffer[2];
+  assign products[1] = 4 * data_buffer[1];
+  assign products[0] = -1 * data_buffer[0];
+
+  logic [2:0][31:0] level1sums;
+
+  lowerBitAdder #(8) addr0(.A(products[6]), .B(products[5]), .Out[level1sums[0]]);
+  lowerBitAdder #(8) addr1(.A(products[4]), .B(products[3]), .Out[level1sums[1]]);
+  lowerBitAdder #(8) addr2(.A(products[2]), .B(products[1]), .Out[level1sums[2]]);
+
+  logic [1:0][31:0] level2sums;
+
+  lowerBitAdder #(8) addr3(.A(level1sums[2]), .B(level1sums[1]), .Out[level2sums[0]]);
+  lowerBitAdder #(8) addr4(.A(level1sums[0]), .B(products[0]), .Out[level2sums[1]]);
+
+  lowerBitAdder #(8) addr5(.A(level2sums[1]), .B(level2sums[0]), .Out(cValue[31:0]));
+
+endmodule: getCvalLowerBit
+
+
+
