@@ -14,7 +14,7 @@ def save_grid(grid, path):
     writeFile(path, s)
 
 def save_sv_grid(grid, path):
-    s_grid = [["32'd"+str(elem) for elem in row] for row in grid]
+    s_grid = [["8'd"+str(elem) for elem in row] for row in grid]
     lines = [", ".join(row) for row in s_grid]
     s = "{\n" + ",\n".join(lines) + "\n}"
     writeFile(path, s)
@@ -36,37 +36,44 @@ def get_random_gradient(num_rows, num_cols):
 
 
 def main():
-    num_rows = 16
-    num_cols = 16
+    num_rows = 720
+    num_cols = 1280
     zero_grid =  [[0 for c in range(num_cols)] for r in range(num_rows)]
     basic_r = get_basic_gradient(num_rows, num_cols)
-    basic_g = zero_grid
-    basic_b = zero_grid
-    save_grid(basic_r, "grids/basic_grid_r.txt")
-    save_grid(basic_g, "grids/basic_grid_g.txt")
-    save_grid(basic_b, "grids/basic_grid_b.txt")
-    #save_sv_grid(basic, "grids/sv_gradient.txt")
+    #basic_g = zero_grid
+    #basic_b = zero_grid
+    save_grid(basic_r, "grids/basic_grid.txt")
+    #save_grid(basic_g, "grids/basic_grid_g.txt")
+    #save_grid(basic_b, "grids/basic_grid_b.txt")
+    save_sv_grid(basic_r, "grids/sv_gradient_8bit.txt")
     terped_r = interpolation.interp_extern(basic_r)
-    terped_g = interpolation.interp_extern(basic_g)
-    terped_b = interpolation.interp_extern(basic_b)
-    save_grid(terped_r, "grids/interpolated_example_r.txt")
-    save_grid(terped_g, "grids/interpolated_example_g.txt")
-    save_grid(terped_b, "grids/interpolated_example_b.txt")
+    #terped_g = interpolation.interp_extern(basic_g)
+    #terped_b = interpolation.interp_extern(basic_b)
+    save_grid(terped_r, "grids/interpolated_example.txt")
+    #save_grid(terped_g, "grids/interpolated_example_g.txt")
+    #save_grid(terped_b, "grids/interpolated_example_b.txt")
+'''
+    expanded_basic_r = interpolation.expand_basic_grid(basic_r)
+    #expanded_basic_g = interpolation.expand_basic_grid(basic_g)
+    #expanded_basic_b = interpolation.expand_basic_grid(basic_b)
+    save_grid(expanded_basic_r, "grids/expanded_basic.txt")
+    #save_grid(expanded_basic_g, "grids/expanded_basic_g.txt")
+    #save_grid(expanded_basic_b, "grids/expanded_basic_b.txt")
 
     rand_r = get_random_gradient(num_rows, num_cols)
-    rand_g = zero_grid
-    rand_b = zero_grid
-    save_grid(rand_r, "grids/random_grid_r.txt")
-    save_grid(rand_g, "grids/random_grid_g.txt")
-    save_grid(rand_b, "grids/random_grid_b.txt")
+    #rand_g = zero_grid
+    #rand_b = zero_grid
+    save_grid(rand_r, "grids/random_grid.txt")
+    #save_grid(rand_g, "grids/random_grid_g.txt")
+    #save_grid(rand_b, "grids/random_grid_b.txt")
 
     terped_r = interpolation.interp_extern(rand_r)
-    terped_g = interpolation.interp_extern(rand_g)
-    terped_b = interpolation.interp_extern(rand_b)
-    save_grid(terped_r, "grids/interpolated_random_r.txt")
-    save_grid(terped_g, "grids/interpolated_random_g.txt")
-    save_grid(terped_b, "grids/interpolated_random_b.txt")
-
+    #terped_g = interpolation.interp_extern(rand_g)
+    #terped_b = interpolation.interp_extern(rand_b)
+    save_grid(terped_r, "grids/interpolated_random.txt")
+    #save_grid(terped_g, "grids/interpolated_random_g.txt")
+    #save_grid(terped_b, "grids/interpolated_random_b.txt")
+'''
 
 main()
 

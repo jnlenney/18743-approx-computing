@@ -127,12 +127,12 @@ def interp_col(mem, col, rows, buf, shift):
 
 def interp_abc(mem, rows, cols, buf):
     for row in range(0, rows, 4):
-        interp_row(mem, row, cols, buf, 2**4)
+        interp_row(mem, row, cols, buf, 2**6)
         buf.clear()
 
 def interp_cols(mem, rows, cols, buf):
     for col in range(0, cols):
-        shift = 2**6 if col % 4 != 0 else 2**4
+        shift = (2**6) if col % 4 != 0 else 2**6
         interp_col(mem, col, rows, buf, shift)
         buf.clear()
 
@@ -288,4 +288,22 @@ def interp_extern(grid):
             mem.write(r*4,c*4,val)
 
     interpolate(mem, num_rows, num_cols)
+    return mem.data
+
+def expand_basic_grid(grid):
+    num_true_rows = len(grid)
+    num_true_cols = len(grid[0])
+    num_sp = 4
+    num_rows = num_true_rows * num_sp
+    num_cols = num_true_cols * num_sp
+
+    mem = Memory(num_rows, num_cols)
+
+    for r in range(num_true_rows):
+        for c in range(num_true_cols):
+            val = grid[r][c]
+            for i in range(4):
+                for j in range(4):
+                    mem.write(r*4+i, c*4+j, val)
+
     return mem.data
