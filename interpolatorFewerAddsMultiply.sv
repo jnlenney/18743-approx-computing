@@ -1,8 +1,8 @@
 `default_nettype none
 
 module getAValShort
-  (input  logic [7:0][31:0] data_buffer,
-   output logic      [39:0] aValue);
+  (input  logic [7:0][ 7:0] data_buffer,
+   output logic      [31:0] aValue);
 
   assign aValue =   4 * data_buffer[6]
                   -10 * data_buffer[5]
@@ -14,8 +14,8 @@ endmodule: getAValShort
 
 
 module getBValShort
-  (input  logic [7:0][31:0] data_buffer,
-   output logic      [39:0] bValue);
+  (input  logic [7:0][ 7:0] data_buffer,
+   output logic      [31:0] bValue);
 
   assign bValue =   4 * data_buffer[6]
                   -11 * data_buffer[5]
@@ -28,8 +28,8 @@ endmodule: getBValShort
 
 
 module getCValShort
-  (input  logic [7:0][31:0] data_buffer,
-   output logic      [39:0] cValue);
+  (input  logic [7:0][ 7:0] data_buffer,
+   output logic      [31:0] cValue);
 
   assign cValue = - 5 * data_buffer[6]
                   +17 * data_buffer[5]

@@ -4,8 +4,8 @@
 
 
 module getAValSimple
-  (input  logic [7:0][31:0] data_buffer,
-   output logic [39:0]      aValue      );
+  (input  logic [7:0][ 7:0] data_buffer,
+   output logic      [39:0] aValue      );
 
   assign aValue = - 1 * data_buffer[7]
                   + 4 * data_buffer[6]
@@ -19,8 +19,8 @@ endmodule: getAValSimple
 
 
 module getBValSimple
-  (input  logic [7:0][31:0] data_buffer,
-   output logic [39:0]      bValue      );
+  (input  logic [7:0][ 7:0] data_buffer,
+   output logic      [39:0] bValue      );
 
   assign bValue = - 1 * data_buffer[7]
                   + 4 * data_buffer[6]
@@ -36,8 +36,8 @@ endmodule: getBValSimple
 
 
 module getCValSimple
-  (input  logic [7:0][31:0] data_buffer,
-   output logic [39:0]      cValue      );
+  (input  logic [7:0][ 7:0] data_buffer,
+   output logic      [39:0] cValue      );
 
   assign cValue =   1 * data_buffer[7]
                   - 4 * data_buffer[6]

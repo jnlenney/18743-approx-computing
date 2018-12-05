@@ -1,14 +1,14 @@
 `default_nettype none
 
 module approxMirrorAdder
-  (input  logic [39:0] A, B,
-   output logic [39:0] Out  );
+  (input  logic [31:0] A, B,
+   output logic [31:0] Out  );
 
-  logic [39:0] Carries;
+  logic [31:0] Carries;
 
   genvar i;
   generate 
-    for (i = 0; i < 39; i = i + 1) begin: adding
+    for (i = 0; i < 31; i = i + 1) begin: adding
      mirrorAdd mA(.A(A[i]), 
                   .B(B[i]), 
                   .Cin(Carries[i]), 
