@@ -15,7 +15,7 @@ module interpolator
   always_ff @(posedge clock) begin
     if (~reset_n) begin
       //Set everything in the buffer to 0 on reset, so we know what's in it
-      data_buffer <= 256'b0;
+      data_buffer = 256'b0;
     end
     else begin
       //Otherwise we'd like to move the data buffer along
@@ -102,11 +102,11 @@ module interpol_test
 
   //set-up
   initial begin
-//    clock = 0;
+    clock = 0;
     reset_n = 0;
-//    forever begin
-//      #5 clock = ~clock;
-//    end
+    forever begin
+      #5 clock = ~clock;
+    end
   end
 
   //Places to store our pixels
