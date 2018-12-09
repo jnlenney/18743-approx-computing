@@ -1,0 +1,100 @@
+{
+    "Modules": {
+        "getAvalLowerBit": {},
+        "...MASTER...": {},
+        "std": {},
+        "getAvalMirrorAdd": {},
+        "approxMirrorAdder_0000": {},
+        "getAValSimple": {
+            "Compiled Times": 1,
+            "Compiled": "Yes"
+        },
+        "getAval": {},
+        "getBval": {},
+        "getCval": {},
+        "getCvalMirrorAdd": {},
+        "getBvalLowerBit": {},
+        "getBValSimple": {
+            "Compiled Times": 1,
+            "Compiled": "Yes"
+        },
+        "getBvalMirrorAdd": {},
+        "getCValSimple": {
+            "Compiled Times": 1,
+            "Compiled": "Yes"
+        },
+        "getAvalApproxMult": {},
+        "getBvalApproxMult": {},
+        "getCvalApproxMult": {},
+        "getCvalLowerBit": {},
+        "interpol_test": {
+            "Compiled Times": 6,
+            "Compiled": "Yes"
+        }
+    },
+    "CompUnits": {
+        "amcQw_d": {
+            "bytes": 12239,
+            "mod": "...MASTER...",
+            "mode": 4,
+            "out": "amcQw_d.o",
+            "archive": "archive.13/_28408_archive_1.a"
+        },
+        "JT5uG_d": {
+            "bytes": 8080,
+            "mod": "getAValSimple",
+            "mode": 4,
+            "out": "JT5uG_d.o",
+            "archive": "archive.13/_28408_archive_1.a"
+        },
+        "h8rsA_d": {
+            "bytes": 58466,
+            "mod": "interpol_test",
+            "mode": 4,
+            "out": "h8rsA_d.o",
+            "archive": "archive.13/_28408_archive_1.a"
+        },
+        "GB9j2_d": {
+            "bytes": 8284,
+            "mod": "getBValSimple",
+            "mode": 4,
+            "out": "GB9j2_d.o",
+            "archive": "archive.13/_28408_archive_1.a"
+        },
+        "Mrg51_d": {
+            "bytes": 8076,
+            "mod": "getCValSimple",
+            "mode": 4,
+            "out": "Mrg51_d.o",
+            "archive": "archive.13/_28408_archive_1.a"
+        }
+    },
+    "ObjArchives": [
+        {
+            "archive": "archive.13/_28408_archive_1.a",
+            "size": 95145,
+            "objects": [
+                [
+                    "amcQw_d.o",
+                    12239
+                ],
+                [
+                    "JT5uG_d.o",
+                    8080
+                ],
+                [
+                    "GB9j2_d.o",
+                    8284
+                ],
+                [
+                    "Mrg51_d.o",
+                    8076
+                ],
+                [
+                    "h8rsA_d.o",
+                    58466
+                ]
+            ]
+        }
+    ]
+}

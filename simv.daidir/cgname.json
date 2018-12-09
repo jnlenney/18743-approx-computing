@@ -1,0 +1,97 @@
+{
+    "std": [
+        "std",
+        "reYIK",
+        "module"
+    ],
+    "getAvalMirrorAdd": [
+        "getAvalMirrorAdd",
+        "i3a4C",
+        "module"
+    ],
+    "approxMirrorAdder_0000": [
+        "approxMirrorAdder_0000",
+        "yfWwk",
+        "module"
+    ],
+    "getAValSimple": [
+        "getAValSimple",
+        "JT5uG",
+        "module"
+    ],
+    "getAval": [
+        "getAval",
+        "p54Zu",
+        "module"
+    ],
+    "getCValSimple": [
+        "getCValSimple",
+        "Mrg51",
+        "module"
+    ],
+    "getBval": [
+        "getBval",
+        "aCyvh",
+        "module"
+    ],
+    "getCval": [
+        "getCval",
+        "D73CJ",
+        "module"
+    ],
+    "getBValSimple": [
+        "getBValSimple",
+        "GB9j2",
+        "module"
+    ],
+    "getBvalMirrorAdd": [
+        "getBvalMirrorAdd",
+        "MLRxk",
+        "module"
+    ],
+    "getBvalLowerBit": [
+        "getBvalLowerBit",
+        "NNYHP",
+        "module"
+    ],
+    "getCvalMirrorAdd": [
+        "getCvalMirrorAdd",
+        "Fviph",
+        "module"
+    ],
+    "getAvalApproxMult": [
+        "getAvalApproxMult",
+        "bJNjI",
+        "module"
+    ],
+    "getBvalApproxMult": [
+        "getBvalApproxMult",
+        "g6zxf",
+        "module"
+    ],
+    "getCvalApproxMult": [
+        "getCvalApproxMult",
+        "hLjr4",
+        "module"
+    ],
+    "getAvalLowerBit": [
+        "getAvalLowerBit",
+        "iGJ4u",
+        "module"
+    ],
+    "getCvalLowerBit": [
+        "getCvalLowerBit",
+        "HJF8Z",
+        "module"
+    ],
+    "interpol_test": [
+        "interpol_test",
+        "h8rsA",
+        "module"
+    ],
+    "...MASTER...": [
+        "SIM",
+        "amcQw",
+        "module"
+    ]
+}

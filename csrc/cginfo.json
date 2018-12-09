@@ -1,0 +1,279 @@
+{
+    "stat": {
+        "nMops": 6539
+    },
+    "CompileStrategy": "fullobj",
+    "MlibObjs": {},
+    "CurCompileUdps": {},
+    "Misc": {
+        "cwd": "/afs/ece.cmu.edu/usr/cli4/Private/18743-approx-computing",
+        "csrc": "csrc",
+        "csrc_abs": "/afs/ece.cmu.edu/usr/cli4/Private/18743-approx-computing/csrc",
+        "archive_dir": "archive.13",
+        "default_output_dir": "csrc",
+        "daidir": "simv.daidir",
+        "daidir_abs": "/afs/ece.cmu.edu/usr/cli4/Private/18743-approx-computing/simv.daidir"
+    },
+    "CompileProcesses": [
+        "cgproc.28408.json"
+    ],
+    "PrevCompiledModules": {
+        "getCvalLowerBit": {
+            "HJF8Z_d": {
+                "mod": "getCvalLowerBit",
+                "bytes": 16134,
+                "out": "HJF8Z_d.o",
+                "mode": 4,
+                "archive": "archive.13/_prev_archive_1.a"
+            }
+        },
+        "getAvalApproxMult": {
+            "bJNjI_d": {
+                "mod": "getAvalApproxMult",
+                "bytes": 14450,
+                "mode": 4,
+                "out": "bJNjI_d.o",
+                "archive": "archive.13/_prev_archive_1.a"
+            }
+        },
+        "getBvalMirrorAdd": {
+            "MLRxk_d": {
+                "mod": "getBvalMirrorAdd",
+                "bytes": 13588,
+                "out": "MLRxk_d.o",
+                "mode": 4,
+                "archive": "archive.13/_prev_archive_1.a"
+            }
+        },
+        "getCvalMirrorAdd": {
+            "Fviph_d": {
+                "mod": "getCvalMirrorAdd",
+                "bytes": 12629,
+                "out": "Fviph_d.o",
+                "mode": 4,
+                "archive": "archive.13/_prev_archive_1.a"
+            }
+        },
+        "getBvalLowerBit": {
+            "NNYHP_d": {
+                "mod": "getBvalLowerBit",
+                "bytes": 17837,
+                "out": "NNYHP_d.o",
+                "mode": 4,
+                "archive": "archive.13/_prev_archive_1.a"
+            }
+        },
+        "getAval": {
+            "p54Zu_d": {
+                "mod": "getAval",
+                "bytes": 8678,
+                "out": "p54Zu_d.o",
+                "mode": 4,
+                "archive": "archive.13/_prev_archive_1.a"
+            }
+        },
+        "approxMirrorAdder_0000": {
+            "yfWwk_d": {
+                "mod": "approxMirrorAdder_0000",
+                "bytes": 44916,
+                "out": "yfWwk_d.o",
+                "mode": 4,
+                "archive": "archive.13/_prev_archive_1.a"
+            }
+        },
+        "getAvalMirrorAdd": {
+            "i3a4C_d": {
+                "mod": "getAvalMirrorAdd",
+                "bytes": 12629,
+                "out": "i3a4C_d.o",
+                "mode": 4,
+                "archive": "archive.13/_prev_archive_1.a"
+            }
+        },
+        "interpol_test": {
+            "h8rsA_d": {
+                "mod": "interpol_test",
+                "bytes": 58958,
+                "mode": 4,
+                "out": "h8rsA_d.o",
+                "archive": "archive.13/_28408_archive_1.a"
+            }
+        },
+        "getCvalApproxMult": {
+            "hLjr4_d": {
+                "mod": "getCvalApproxMult",
+                "bytes": 14510,
+                "mode": 4,
+                "out": "hLjr4_d.o",
+                "archive": "archive.13/_prev_archive_1.a"
+            }
+        },
+        "std": {
+            "reYIK_d": {
+                "mod": "std",
+                "bytes": 29004,
+                "out": "reYIK_d.o",
+                "mode": 4,
+                "archive": "archive.13/_prev_archive_1.a"
+            }
+        },
+        "getCval": {
+            "D73CJ_d": {
+                "mod": "getCval",
+                "bytes": 8636,
+                "out": "D73CJ_d.o",
+                "mode": 4,
+                "archive": "archive.13/_prev_archive_1.a"
+            }
+        },
+        "getBvalApproxMult": {
+            "g6zxf_d": {
+                "mod": "getBvalApproxMult",
+                "bytes": 15010,
+                "mode": 4,
+                "out": "g6zxf_d.o",
+                "archive": "archive.13/_prev_archive_1.a"
+            }
+        },
+        "getAvalLowerBit": {
+            "iGJ4u_d": {
+                "mod": "getAvalLowerBit",
+                "bytes": 16134,
+                "out": "iGJ4u_d.o",
+                "mode": 4,
+                "archive": "archive.13/_prev_archive_1.a"
+            }
+        },
+        "...MASTER...": {
+            "amcQw_d": {
+                "mod": "...MASTER...",
+                "bytes": 12239,
+                "mode": 4,
+                "out": "amcQw_d.o",
+                "archive": "archive.13/_28408_archive_1.a"
+            }
+        },
+        "getBval": {
+            "aCyvh_d": {
+                "mod": "getBval",
+                "bytes": 8786,
+                "out": "aCyvh_d.o",
+                "mode": 4,
+                "archive": "archive.13/_prev_archive_1.a"
+            }
+        }
+    },
+    "NameTable": {
+        "std": [
+            "std",
+            "reYIK",
+            "module"
+        ],
+        "getAvalMirrorAdd": [
+            "getAvalMirrorAdd",
+            "i3a4C",
+            "module"
+        ],
+        "approxMirrorAdder_0000": [
+            "approxMirrorAdder_0000",
+            "yfWwk",
+            "module"
+        ],
+        "getAValSimple": [
+            "getAValSimple",
+            "JT5uG",
+            "module"
+        ],
+        "getAval": [
+            "getAval",
+            "p54Zu",
+            "module"
+        ],
+        "getCValSimple": [
+            "getCValSimple",
+            "Mrg51",
+            "module"
+        ],
+        "getBval": [
+            "getBval",
+            "aCyvh",
+            "module"
+        ],
+        "getCval": [
+            "getCval",
+            "D73CJ",
+            "module"
+        ],
+        "getBValSimple": [
+            "getBValSimple",
+            "GB9j2",
+            "module"
+        ],
+        "getBvalMirrorAdd": [
+            "getBvalMirrorAdd",
+            "MLRxk",
+            "module"
+        ],
+        "getBvalLowerBit": [
+            "getBvalLowerBit",
+            "NNYHP",
+            "module"
+        ],
+        "getCvalMirrorAdd": [
+            "getCvalMirrorAdd",
+            "Fviph",
+            "module"
+        ],
+        "getAvalApproxMult": [
+            "getAvalApproxMult",
+            "bJNjI",
+            "module"
+        ],
+        "getBvalApproxMult": [
+            "getBvalApproxMult",
+            "g6zxf",
+            "module"
+        ],
+        "getCvalApproxMult": [
+            "getCvalApproxMult",
+            "hLjr4",
+            "module"
+        ],
+        "getAvalLowerBit": [
+            "getAvalLowerBit",
+            "iGJ4u",
+            "module"
+        ],
+        "getCvalLowerBit": [
+            "getCvalLowerBit",
+            "HJF8Z",
+            "module"
+        ],
+        "interpol_test": [
+            "interpol_test",
+            "h8rsA",
+            "module"
+        ],
+        "...MASTER...": [
+            "SIM",
+            "amcQw",
+            "module"
+        ]
+    },
+    "CompileStatus": "Successful",
+    "SIMBData": {
+        "out": "amcQwB.o",
+        "bytes": 59905
+    },
+    "LVLData": [
+        "SIM"
+    ],
+    "CurCompileModules": [
+        "...MASTER...",
+        "getAValSimple",
+        "getBValSimple",
+        "getCValSimple",
+        "interpol_test"
+    ],
+    "PEModules": []
+}
