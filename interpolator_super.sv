@@ -41,12 +41,12 @@ module interpolator
   getBval gbv(.data_buffer(data_buffer),.bValue(bValue));
   getCval gcv(.data_buffer(data_buffer),.cValue(cValue));
   
-  
+  */
   // with fewer coeffs
   getAValShort gav(.data_buffer(data_buffer),.aValue(aValue));
   getBValShort gbv(.data_buffer(data_buffer),.bValue(bValue));
   getCValShort gcv(.data_buffer(data_buffer),.cValue(cValue));
-  
+  /*
   // with simple coeffs and bit shifts
   getAValSimple gav(.data_buffer(data_buffer),.aValue(aValue));
   getBValSimple gbv(.data_buffer(data_buffer),.bValue(bValue));
@@ -56,12 +56,12 @@ module interpolator
   getAvalApproxMult gav(.data_buffer(data_buffer),.aValue(aValue));
   getBvalApproxMult gbv(.data_buffer(data_buffer),.bValue(bValue));
   getCvalApproxMult gcv(.data_buffer(data_buffer),.cValue(cValue));
-  */
+  
   // with Mirror Adder
   getAvalMirrorAdd gav(.data_buffer(data_buffer),.aValue(aValue));
   getBvalMirrorAdd gbv(.data_buffer(data_buffer),.bValue(bValue));
   getCvalMirrorAdd gcv(.data_buffer(data_buffer),.cValue(cValue));
-  /*
+  
   // with lower bit adder
   getAvalLowerBit gav(.data_buffer(data_buffer),.aValue(aValue));
   getBvalLowerBit gbv(.data_buffer(data_buffer),.bValue(bValue));
@@ -96,22 +96,22 @@ module interpol_test;
   end
 
   //Places to store our pixels
-  logic [0:255][ 7:0] pixels ;
-  logic [0:255][13:0] aSubPix;
-  logic [0:255][13:0] bSubPix;
-  logic [0:255][13:0] cSubPix;
-  logic [0:255][13:0] dSubPix;
-  logic [0:255][13:0] hSubPix;
-  logic [0:255][13:0] nSubPix;
-  logic [0:255][13:0] eSubPix;
-  logic [0:255][13:0] fSubPix;
-  logic [0:255][13:0] gSubPix;
-  logic [0:255][13:0] iSubPix;
-  logic [0:255][13:0] jSubPix;
-  logic [0:255][13:0] kSubPix;
-  logic [0:255][13:0] pSubPix;
-  logic [0:255][13:0] qSubPix;
-  logic [0:255][13:0] rSubPix;
+  logic [0:255][7:0] pixels ;
+  logic [0:255][7:0] aSubPix;
+  logic [0:255][7:0] bSubPix;
+  logic [0:255][7:0] cSubPix;
+  logic [0:255][7:0] dSubPix;
+  logic [0:255][7:0] hSubPix;
+  logic [0:255][7:0] nSubPix;
+  logic [0:255][7:0] eSubPix;
+  logic [0:255][7:0] fSubPix;
+  logic [0:255][7:0] gSubPix;
+  logic [0:255][7:0] iSubPix;
+  logic [0:255][7:0] jSubPix;
+  logic [0:255][7:0] kSubPix;
+  logic [0:255][7:0] pSubPix;
+  logic [0:255][7:0] qSubPix;
+  logic [0:255][7:0] rSubPix;
 
 
   assign pixels = {8'd0  , 8'd8  , 8'd17 , 8'd25 , 8'd34 , 8'd42 , 
@@ -180,9 +180,9 @@ module interpol_test;
           data_in <= pixels[i*`WIDTH+15];
         end
         if (k > 12) begin
-          aSubPix[i*`WIDTH+k-13] <= I.aValue[19:6];
-          bSubPix[i*`WIDTH+k-13] <= I.bValue[19:6];
-          cSubPix[i*`WIDTH+k-13] <= I.cValue[19:6];         
+          aSubPix[i*`WIDTH+k-13] <= I.aValue[13:6];
+          bSubPix[i*`WIDTH+k-13] <= I.bValue[13:6];
+          cSubPix[i*`WIDTH+k-13] <= I.cValue[13:6];         
         end
         @(posedge clock);
       end
@@ -202,9 +202,9 @@ module interpol_test;
           data_in <= pixels[`WIDTH*(`HEIGHT-1)+i];
         end
         if (k > 12) begin
-          dSubPix[i+`WIDTH*(k-13)] <= I.aValue[19:6];
-          hSubPix[i+`WIDTH*(k-13)] <= I.bValue[19:6];
-          nSubPix[i+`WIDTH*(k-13)] <= I.cValue[19:6];
+          dSubPix[i+`WIDTH*(k-13)] <= I.aValue[13:6];
+          hSubPix[i+`WIDTH*(k-13)] <= I.bValue[13:6];
+          nSubPix[i+`WIDTH*(k-13)] <= I.cValue[13:6];
         end
         @(posedge clock);
       end
@@ -224,9 +224,9 @@ module interpol_test;
           data_in <= aSubPix[`WIDTH*(`HEIGHT-1)+i];
         end
         if (k > 12) begin
-          eSubPix[i+`WIDTH*(k-13)] <= I.aValue[19:6];
-          iSubPix[i+`WIDTH*(k-13)] <= I.bValue[19:6];
-          pSubPix[i+`WIDTH*(k-13)] <= I.cValue[19:6];
+          eSubPix[i+`WIDTH*(k-13)] <= I.aValue[13:6];
+          iSubPix[i+`WIDTH*(k-13)] <= I.bValue[13:6];
+          pSubPix[i+`WIDTH*(k-13)] <= I.cValue[13:6];
         end
         @(posedge clock);
       end
@@ -246,9 +246,9 @@ module interpol_test;
           data_in <= bSubPix[`WIDTH*(`HEIGHT-1)+i];
         end
         if (k > 12) begin
-          fSubPix[i+`WIDTH*(k-13)] <= I.aValue[19:6];
-          jSubPix[i+`WIDTH*(k-13)] <= I.bValue[19:6];
-          qSubPix[i+`WIDTH*(k-13)] <= I.cValue[19:6];
+          fSubPix[i+`WIDTH*(k-13)] <= I.aValue[13:6];
+          jSubPix[i+`WIDTH*(k-13)] <= I.bValue[13:6];
+          qSubPix[i+`WIDTH*(k-13)] <= I.cValue[13:6];
         end
         @(posedge clock);
       end
@@ -268,9 +268,9 @@ module interpol_test;
           data_in <= cSubPix[`WIDTH*(`HEIGHT-1)+i];
         end
         if (k > 12) begin
-          gSubPix[i+`WIDTH*(k-13)] <= I.aValue[19:6];
-          kSubPix[i+`WIDTH*(k-13)] <= I.bValue[19:6];
-          rSubPix[i+`WIDTH*(k-13)] <= I.cValue[19:6];
+          gSubPix[i+`WIDTH*(k-13)] <= I.aValue[13:6];
+          kSubPix[i+`WIDTH*(k-13)] <= I.bValue[13:6];
+          rSubPix[i+`WIDTH*(k-13)] <= I.cValue[13:6];
         end
         @(posedge clock);
       end
