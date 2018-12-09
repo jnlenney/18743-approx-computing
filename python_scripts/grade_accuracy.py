@@ -83,6 +83,7 @@ def assess_difference_grid(dif_grid):
     print("total number of cells:    %d" % total_cells)
     print("average of squares:       %f" % avg_of_sqrs)
     print("score:                    %f" % score) 
+    print("real score:               %f" % (1-(score/255)))
 
 def main():
     reference_path = "grids/interpolated_example.txt"
