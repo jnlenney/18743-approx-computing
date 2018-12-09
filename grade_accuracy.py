@@ -86,7 +86,7 @@ def assess_difference_grid(dif_grid):
 
 def main():
     reference_path = "grids/interpolated_example.txt"
-    output_path = "grids/newOut.txt"
+    output_path = "outputs/lower_bit.txt"
     is_sv = True
     rows = 16
     cols = 16

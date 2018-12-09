@@ -63,7 +63,7 @@ def init(data):
     path1 = "grids/basic_grid.txt"
     #path1 = "grids/interpolated_example.txt"
     is_sv = True
-    path2 = "grids/newOut.txt"
+    path2 = "outputs/short.txt"
     data.grid1 = read_grid(path1)
     if is_sv:
         data.grid2 = get_sv_grid(path2, 16, 16)

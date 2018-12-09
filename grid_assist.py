@@ -36,8 +36,8 @@ def get_random_gradient(num_rows, num_cols):
 
 
 def main():
-    num_rows = 720
-    num_cols = 1280
+    num_rows = 16
+    num_cols = 16
     zero_grid =  [[0 for c in range(num_cols)] for r in range(num_rows)]
     basic_r = get_basic_gradient(num_rows, num_cols)
     #basic_g = zero_grid
