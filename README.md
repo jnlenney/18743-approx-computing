@@ -46,5 +46,5 @@ These power values may seem insignificant, but we believe this will scale up whe
 ```python_scripts/draw_grid.py``` - this file reads text files with pixel data and creates a static animation to visualize pixels\
 ```python_scripts/grid_assist.py``` - this file produces text files with grids that can be used by our sv testbench, and our visualizer\
 ```python_scripts/grade_accuracy.py``` - this file takes in a path to a reference output and a computed output and outputs a measuer of how accurate the output is\
-```python_scripts/grids/``` - this directory contains all of the text files used as inputs for intepolation, as well as reference outputs\
+```python_scripts/grids/``` - this directory contains all of the text files used as inputs for intepolation, as well as reference outputs
 
