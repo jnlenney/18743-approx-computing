@@ -21,10 +21,8 @@ We also made variations of our core that had different approximations implemente
 - approximate multiplications - our implimentation of an approximate multiplier
 
 ### Results
-In the end we did not use our FPGA, so our power data comes from the Synopsis Design Compiler. Our accuracy data comes from a python scripts which determines accuracy by summing the squares of differences of all of the sub-pixels between our refer\
-
+In the end we did not use our FPGA, so our power data comes from the Synopsis Design Compiler. Our accuracy data comes from a python scripts which determines accuracy by summing the squares of differences of all of the sub-pixels between our refer
 The table below shows the power and accuracy of our implementations
-
 | Implementaiton | Accuracy (%) | Power (uW) |
 | -------------- |:------------:|:----------:|
 | Baseline | 100 | 451.10 |
@@ -33,15 +31,7 @@ The table below shows the power and accuracy of our implementations
 | Approx Multiplications | 97.74 | 294.38 |
 | Approx Mirror Adder | 48.15 | 356.165 |
 | Lower Bit OR Adder | 99.76 | 356.165 |
-
-We ran analysis with DC of our design operating on an toy example (a small 16x16 grid) which gives us the following power data:\
-Total Dynamic Power:  ```1.8875 mW```\
-Cell-Leakage Power:  ```63.1889 nW```\
-
-H
-
-These power values may seem insignificant, but we believe this will scale up when we have many cores running in parallel.
-
+These power values may seem insignificant, but we believe this will scale up when we have many cores running in parallel. We can see in the table that the tradeoff between accuracy and power is reasonable, as we can save over 20% of our power while maintaining above 95% of our accuracy.
 
 ### Files
 ```interpolators/interpolatorBasic.sv``` - this file contains our system verilog implementation of our correct sub-pixel interpolation (which mimics the buffered python implementation)\
