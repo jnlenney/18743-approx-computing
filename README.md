@@ -13,7 +13,7 @@ improvement in power usage, for solutions that reasobable losses in accuracy.
 ### What did we build?
 By the end of our project we were able to create a computation core for sub-pixel interpolation. This core loads in values from memory into a buffer, multiplies the 
 values in the buffer by the appropriate coefficients, and then adds the products together. \
-We also made variations of our core that had different approximations implemented. Here is a list of our approximations:\
+We also made variations of our core that had different approximations implemented. Here is a list of our approximations:
 - approximate mirror adders - our implementation of an approximate mirror adder
 - lower-bit-or adders - add upper bits and or lower bits
 - simple multiplications - rounding coefficients to the nearest power of 2
@@ -21,11 +21,27 @@ We also made variations of our core that had different approximations implemente
 - approximate multiplications - our implimentation of an approximate multiplier
 
 ### Results
-Based on our preliminary tests with Synopsis Design Compiler, our design could reach the maximum frequency on our board, which would be 200 MHz.
+In the end we did not use our FPGA, so our power data comes from the Synopsis Design Compiler. Our accuracy data comes from a python scripts which determines accuracy by summing the squares of differences of all of the sub-pixels between our refer\
+
+The table below shows the power and accuracy of our implementations
+
+| Implementaiton | Accuracy (%) | Power (uW) |
+| -------------- |:------------:|:----------:|
+| Baseline | 100 | 451.10 |
+| Fewer Coefficients | 94.96 | 414.18 |
+| Simpler Coefficients | 86.69 | 471.94 |
+| Approx Multiplications | 97.74 | 294.38 |
+| Approx Mirror Adder | 48.15 | 356.165 |
+| Lower Bit OR Adder | 99.76 | 356.165 |
+
 We ran analysis with DC of our design operating on an toy example (a small 16x16 grid) which gives us the following power data:\
 Total Dynamic Power:  ```1.8875 mW```\
 Cell-Leakage Power:  ```63.1889 nW```\
-These values may seem incredibly insignificant, but we believe they will become much larger with a larger example, and when running for an extended period of time.
+
+H
+
+These power values may seem insignificant, but we believe this will scale up when we have many cores running in parallel.
+
 
 ### Files
 ```interpolators/interpolatorBasic.sv``` - this file contains our system verilog implementation of our correct sub-pixel interpolation (which mimics the buffered python implementation)\
